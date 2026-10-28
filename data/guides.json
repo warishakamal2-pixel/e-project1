@@ -1,0 +1,90 @@
+[
+    {
+        "name": "Alpine route planning",
+        "role": "Route selection and conditions",
+        "bio": "Match a route to the team's experience, weather and terrain.",
+        "image": {
+            "alt": "Climber ascending a rugged cliff with a backpack",
+            "credit": "Pexels",
+            "license": "Pexels License",
+            "local": "assets/images/climbing/guide-climber-rope.jpg"
+        }
+    },
+    {
+        "name": "Climbing systems",
+        "role": "Ropes and technical movement",
+        "bio": "Use climbing systems and agreed movement practices on exposed terrain.",
+        "image": {
+            "alt": "Climber scaling a rugged outdoor surface",
+            "credit": "Pexels",
+            "license": "Pexels License",
+            "local": "assets/images/climbing/guide-climber-wall.jpg"
+        }
+    },
+    {
+        "name": "High-altitude readiness",
+        "role": "Acclimatization and health",
+        "bio": "Plan a gradual ascent and monitor health throughout a high-altitude climb.",
+        "image": {
+            "alt": "Climber wearing a helmet on a steep rock face",
+            "credit": "Pexels",
+            "license": "Pexels License",
+            "local": "assets/images/climbing/guide-alpine-climber.jpg"
+        }
+    },
+    {
+        "name": "Snow and ice movement",
+        "role": "Crampon and ice-axe skills",
+        "bio": "Learn footwork and ice-axe use with qualified instruction before attempting a snow or ice route.",
+        "image": {
+               "alt": "Climber practicing movement on a snowy slope",
+               "credit": "Pexels",
+               "license": "Pexels License",
+               "local": "assets/images/climbing/expedition-denali.jpg"
+        }
+    },
+    {
+        "name": "Glacier travel",
+        "role": "Roped travel and rescue practice",
+        "bio": "Glacier travel involves hidden crevasses. Rope-team methods and crevasse rescue must be learned and practiced before a trip.",
+        "image": {
+               "alt": "Mountaineer roped on a snowy glacier slope",
+               "credit": "Pexels",
+               "license": "Pexels License",
+               "local": "assets/images/climbing/expedition-k2.jpg"
+        }
+    },
+    {
+        "name": "Weather and route decisions",
+        "role": "Forecasts and turnaround planning",
+        "bio": "Use a current mountain forecast, identify objective hazards and agree on a turnaround time before setting out.",
+        "image": {
+               "alt": "Climber assessing a high snowy route",
+               "credit": "Pexels",
+               "license": "Pexels License",
+               "local": "assets/images/climbing/expedition-everest.jpg"
+        }
+    },
+    {
+        "name": "Rock climbing foundations",
+        "role": "Movement and protection",
+        "bio": "Practice movement, belaying, knots and equipment checks with a qualified instructor in an appropriate learning setting.",
+        "image": {
+               "alt": "Roped climber ascending an outdoor rock wall",
+               "credit": "Pexels",
+               "license": "Pexels License",
+               "local": "assets/images/climbing/gallery-solo-ascent.jpg"
+        }
+    },
+    {
+        "name": "High-altitude health",
+        "role": "Acclimatization and symptom awareness",
+        "bio": "Learn how gradual ascent supports acclimatization and recognize when altitude symptoms mean stopping or descending.",
+        "image": {
+               "alt": "Mountaineer ascending a high mountain in cold weather",
+               "credit": "Pexels",
+               "license": "Pexels License",
+               "local": "assets/images/climbing/page-about.jpg"
+        }
+    }
+]

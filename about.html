@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>About – Alpine Ascents</title>
+    <meta name="description" content="Learn about the principles behind this mountain climbing information and learning website.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/webp" href="assets/images/climbing/fav.webp">
+</head>
+
+<body data-page="about">
+    <div id="nav"></div>
+    <main>
+        <section>
+            <div class="wrap rv">
+                <h1 style="font-size:clamp(2rem,5vw,3.5rem)">About Alpine Ascents</h1>
+                <p>Alpine Ascents is a mountaineering information and learning website: a place to explore mountain routes, understand climbing styles and prepare better questions before a real trip.</p>
+                <p>Explore route profiles, mountaineering field notes and an optional nearby-club search using public map data. This site is not a guiding company, emergency service or booking operator.</p>
+                <p>Start with the <a href="mountaineering.html">mountaineering field guide</a>, compare
+                    <a href="expeditions.html">expedition routes</a>, or review the
+                    <a href="safety.html">mountain safety guide</a>.</p>
+                <h2>What guides this project</h2>
+                <!-- About cards are populated from the shared mountaineering guide data. -->
+                <div id="about-grid" class="grid" aria-live="polite">Loading…</div>
+                <p class="note">Mountain conditions and regulations change. Always confirm current information with local authorities and qualified professionals.</p>
+            </div>
+        </section>
+    </main>
+    <div id="foot"></div>
+    <script src="js/media.js"></script>
+    <!-- The local assistant answers from this site's mountain-climbing data only. -->
+    <script src="js/main.js"></script>
+    <script src="js/assistant.js"></script>
+</body>
+
+</html>

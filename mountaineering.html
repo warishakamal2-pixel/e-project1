@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Mountaineering field guide – Alpine Ascents</title>
+    <meta name="description"
+        content="An introduction to mountaineering history, climbing styles, skills, mountain hazards, records and organizations.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/webp" href="assets/images/climbing/fav.webp">
+</head>
+
+<body data-page="mountaineering">
+    <div id="nav"></div>
+    <main>
+        <section class="field-hero">
+            <div class="wrap field-hero-inner">
+                <p class="eyebrow"><span></span> Alpine Ascents · Field guide</p>
+                <h1>Know the mountain.<br><em>Respect the climb.</em></h1>
+                <p>A practical introduction to how people climb, what the mountains ask of us and where to keep learning.</p>
+                <a class="btn pri" href="#field-history">Explore the guide <span aria-hidden="true">↓</span></a>
+            </div>
+        </section>
+
+        <nav class="field-index" aria-label="Mountaineering guide sections">
+            <div class="wrap field-index-links">
+                <a href="#field-history">History</a>
+                <a href="#field-styles">Styles</a>
+                <a href="#field-techniques">Skills</a>
+                <a href="#field-shelter">Shelter</a>
+                <a href="#field-hazards">Hazards</a>
+                <a href="#field-records">Records</a>
+                <a href="#field-stories">Milestones</a>
+                <a href="#field-organizations">Organizations</a>
+                <a href="#field-developments">Updates</a>
+                <a href="#field-guidelines">Good practice</a>
+            </div>
+        </nav>
+
+        <!-- Each field-guide section below is populated from its matching JSON collection. -->
+        <section class="field-section" id="field-history">
+            <div class="wrap">
+                <div class="field-heading">
+                    <p class="eyebrow"><span></span> Where the story begins</p>
+                    <h2>History, made<br><em>one team at a time.</em></h2>
+                </div>
+                <div class="field-grid" id="history-grid" aria-live="polite">Loading…</div>
+            </div>
+        </section>
+
+        <section class="field-section field-tint" id="field-styles">
+            <div class="wrap">
+                <div class="field-heading">
+                    <p class="eyebrow"><span></span> Different ways up</p>
+                    <h2>Climbing styles</h2>
+                </div>
+                <div class="field-grid" id="styles-grid" aria-live="polite">Loading…</div>
+            </div>
+        </section>
+
+        <section class="field-section" id="field-techniques">
+            <div class="wrap">
+                <div class="field-heading">
+                    <p class="eyebrow"><span></span> Learn before you need it</p>
+                    <h2>Skills are a team sport.</h2>
+                </div>
+                <div class="field-grid" id="techniques-grid" aria-live="polite">Loading…</div>
+            </div>
+        </section>
+
+        <section class="field-section field-tint" id="field-shelter">
+            <div class="wrap">
+                <div class="field-heading">
+                    <p class="eyebrow"><span></span> Nights out there</p>
+                    <h2>Shelter &amp; camps</h2>
+                </div>
+                <div class="field-grid" id="shelter-grid" aria-live="polite">Loading…</div>
+            </div>
+        </section>
+
+        <section class="field-section" id="field-hazards">
+            <div class="wrap">
+                <div class="field-heading">
+                    <p class="eyebrow"><span></span> Conditions change</p>
+                    <h2>Know the hazards.</h2>
+                </div>
+                <div class="field-grid" id="hazards-grid" aria-live="polite">Loading…</div>
+                <p class="field-disclaimer">This field guide is general information, not medical advice or a substitute for in-person instruction. Follow local authorities, current forecasts and qualified professionals.</p>
+            </div>
+        </section>
+
+        <section class="field-section field-tint" id="field-records">
+            <div class="wrap">
+                <div class="field-heading">
+                    <p class="eyebrow"><span></span> A few notable measurements</p>
+                    <h2>Mountains in context.</h2>
+                </div>
+                <div class="field-grid" id="records-grid" aria-live="polite">Loading…</div>
+            </div>
+        </section>
+
+        <section class="field-section" id="field-stories">
+            <div class="wrap">
+                <div class="field-heading">
+                    <p class="eyebrow"><span></span> Expedition milestones</p>
+                    <h2>Stories from the mountains.</h2>
+                </div>
+                <p class="field-intro">These are documented mountaineering milestones, not Alpine Ascents client testimonials or claims about guided trips.</p>
+                <div class="field-grid" id="stories-grid" aria-live="polite">Loading…</div>
+            </div>
+        </section>
+
+        <section class="field-section field-tint" id="field-organizations">
+            <div class="wrap">
+                <div class="field-heading">
+                    <p class="eyebrow"><span></span> Find your climbing community</p>
+                    <h2>Clubs &amp; organizations</h2>
+                </div>
+                <div class="field-grid" id="organizations-grid" aria-live="polite">Loading…</div>
+                <div class="nearby-panel">
+                    <div class="nearby-copy">
+                        <p class="eyebrow"><span></span> Optional · approximate location</p>
+                        <h3>Look for a club near you.</h3>
+                        <p>Your browser asks permission first. If you agree, an approximate location is sent to OpenStreetMap's public map search to look for mapped climbing and mountaineering clubs within about 30 km. Results depend on community-maintained map data.</p>
+                        <button class="btn pri" id="nearby-search" type="button">Share location &amp; search</button>
+                        <p id="nearby-status" class="nearby-status" role="status">Location is off until you choose to search.</p>
+                        <div id="nearby-results" class="nearby-results" aria-live="polite"></div>
+                    </div>
+                    <div id="nearby-map" class="nearby-map" aria-label="Nearby OpenStreetMap view">
+                        <div class="map-placeholder"><span aria-hidden="true">◎</span><p>Your map will appear here after you choose to share an approximate location.</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="field-section" id="field-developments">
+            <div class="wrap">
+                <div class="field-heading">
+                    <p class="eyebrow"><span></span> Keep your plans current</p>
+                    <h2>Field updates &amp; tools</h2>
+                </div>
+                <div class="field-grid" id="developments-grid" aria-live="polite">Loading…</div>
+            </div>
+        </section>
+
+        <section class="field-section field-tint" id="field-guidelines">
+            <div class="wrap">
+                <div class="field-heading">
+                    <p class="eyebrow"><span></span> A better way outside</p>
+                    <h2>General guidelines</h2>
+                </div>
+                <div class="field-grid" id="guidelines-grid" aria-live="polite">Loading…</div>
+                <a class="btn outline-btn" href="safety.html">Read the safety checklist <span aria-hidden="true">↗</span></a>
+            </div>
+        </section>
+
+        <section class="field-video">
+            <div class="wrap field-video-inner">
+                <div>
+                    <p class="eyebrow"><span></span> A moving picture</p>
+                    <h2>Watch the mountains<br><em>come into view.</em></h2>
+                    <p>Use the controls to play or pause. The video is illustrative and does not provide climbing instruction.</p>
+                </div>
+                <video controls preload="none" poster="assets/images/climbing/home-climbing-poster.jpg">
+                    <source src="assets/videos/mountain-climb.mp4" type="video/mp4">
+                    Your browser does not support HTML video.
+                </video>
+            </div>
+        </section>
+    </main>
+    <div id="foot"></div>
+    <script src="js/media.js"></script>
+    <!-- The local assistant answers from this site's mountain-climbing data only. -->
+    <script src="js/main.js"></script>
+    <script src="js/assistant.js"></script>
+</body>
+
+</html>

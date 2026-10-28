@@ -1,0 +1,175 @@
+{
+    "history": [
+        {
+            "title": "The rise of modern alpinism",
+            "category": "History",
+            "text": "European alpine climbing grew into a distinct pursuit during the 18th century. The first recorded ascent of Mont Blanc in 1786 is widely treated as a landmark in the history of modern alpinism.",
+            "image": { "alt": "Mountaineer climbing a snowy slope", "local": "assets/images/climbing/page-about.jpg" }
+        },
+        {
+            "title": "From exploration to shared knowledge",
+            "category": "History",
+            "text": "Climbing history is also a record of local knowledge, changing equipment and teamwork. National park archives preserve expedition reports, route histories, rescues and lessons from earlier climbs.",
+            "image": { "alt": "Climber looking toward a sunlit mountain ridge", "local": "assets/images/climbing/gallery-climber-sunrise.jpg" }
+        }
+    ],
+    "styles": [
+        {
+            "title": "Alpine style",
+            "category": "Climbing styles",
+            "text": "A team carries its supplies and climbs continuously, rather than relying on a chain of stocked camps. The lighter approach can reduce time on a route, but it demands strong teamwork, sound judgement and self-sufficiency.",
+            "image": { "alt": "Roped climber moving up a steep rock face", "local": "assets/images/climbing/guide-alpine-climber.jpg" }
+        },
+        {
+            "title": "Expedition style",
+            "category": "Climbing styles",
+            "text": "A longer expedition may use a base camp and staged higher camps to support acclimatization and carry loads. It requires more logistics and time; fixed ropes and supplemental oxygen are route choices, not guarantees of safety.",
+            "image": { "alt": "Climber progressing on a large rock wall", "local": "assets/images/climbing/gallery-climber-rock-outdoors.jpg" }
+        }
+    ],
+    "techniques": [
+        {
+            "title": "Rope-team travel",
+            "category": "Mountain skills",
+            "text": "Rope systems on glaciers or exposed ground only work when the whole team is trained in their use. Crevasse rescue, spacing and anchor decisions need hands-on practice with a qualified instructor.",
+            "image": { "alt": "Climber using a rope system on a mountain", "local": "assets/images/climbing/guide-climber-rope.jpg" }
+        },
+        {
+            "title": "Rock movement and protection",
+            "category": "Mountain skills",
+            "text": "Scrambling and rock climbing require route-finding, secure movement and protection appropriate to the terrain. Learn knots, belaying and anchor systems in a controlled setting before relying on them outdoors.",
+            "image": { "alt": "Roped climber moving across a rock wall", "local": "assets/images/climbing/gallery-climber-harness.jpg" }
+        },
+        {
+            "title": "Snow and ice travel",
+            "category": "Mountain skills",
+            "text": "Crampons, an ice axe and avalanche equipment are useful only with the training to use them. Check the local avalanche bulletin and forecast, and change plans when conditions exceed your team's experience.",
+            "image": { "alt": "Climber ascending a snow-covered ridge", "local": "assets/images/climbing/gallery-climber-ridge.jpg" }
+        }
+    ],
+    "shelter": [
+        {
+            "title": "Planned camps and mountain huts",
+            "category": "Shelter",
+            "text": "Use designated camps, huts and established sites where available. Check access, booking, seasonal opening and local waste rules before departure; a shelter does not remove exposure or altitude risks.",
+            "image": { "alt": "Mountaineer preparing equipment before a climb", "local": "assets/images/climbing/page-booking.jpg" }
+        },
+        {
+            "title": "Emergency bivouac",
+            "category": "Shelter",
+            "text": "A bivouac is an unplanned night out, not a substitute for an itinerary. Carry weather-appropriate emergency insulation and shelter, tell someone your plan, and seek a safer descent or rescue when conditions allow.",
+            "image": { "alt": "Mountaineer crossing a snowy slope in cold-weather gear", "local": "assets/images/climbing/expedition-denali.jpg" }
+        }
+    ],
+    "hazards": [
+        {
+            "title": "Altitude illness",
+            "category": "Mountain hazards",
+            "text": "Headache, nausea and unusual fatigue can be early signs of acute mountain sickness. Do not ascend with symptoms; worsening symptoms at rest, confusion or breathlessness require urgent descent and medical help.",
+            "image": { "alt": "Climber ascending a high mountain slope", "local": "assets/images/climbing/page-safety.jpg" }
+        },
+        {
+            "title": "Weather, avalanche and falling debris",
+            "category": "Mountain hazards",
+            "text": "Wind, storms, unstable snow, rockfall and changing visibility can turn a familiar route into a serious hazard. Review current local forecasts and avalanche bulletins and agree on a turnaround plan.",
+            "image": { "alt": "Climber roped on a steep snowy mountain face", "local": "assets/images/climbing/expedition-k2.jpg" }
+        },
+        {
+            "title": "Cold, exhaustion and delays",
+            "category": "Mountain hazards",
+            "text": "Cold injury, dehydration, fatigue and a slower-than-planned descent can compound other risks. Protect hands and feet, eat and drink regularly, monitor partners and keep enough reserve for the return.",
+            "image": { "alt": "Mountaineer climbing an icy waterfall", "local": "assets/images/climbing/destination-denali.jpg" }
+        }
+    ],
+    "records": [
+        {
+            "title": "Highest above sea level",
+            "category": "Mountain records",
+            "text": "Mount Everest is Earth's highest mountain above sea level. Nepal and China announced a jointly measured height of 8,848.86 metres in 2020.",
+            "image": { "alt": "Climber roped on a steep snowy slope", "local": "assets/images/climbing/expedition-everest.jpg" }
+        },
+        {
+            "title": "Highest outside Asia",
+            "category": "Mountain records",
+            "text": "Aconcagua, in Argentina's Andes, rises to 6,961 metres and is the highest mountain outside Asia.",
+            "image": { "alt": "Mountaineer ascending a rugged rock face", "local": "assets/images/climbing/expedition-aconcagua.jpg" }
+        },
+        {
+            "title": "Highest in North America",
+            "category": "Mountain records",
+            "text": "Denali's summit is 6,190 metres above sea level. The National Park Service publishes route histories, seasonal reports and climbing statistics for the Alaska Range.",
+            "image": { "alt": "Mountaineer climbing a high alpine slope", "local": "assets/images/climbing/expedition-mont-blanc.jpg" }
+        }
+    ],
+    "stories": [
+        {
+            "title": "Annapurna I · 1950",
+            "category": "Expedition milestone",
+            "text": "Maurice Herzog and Louis Lachenal reached the summit of Annapurna I on 3 June 1950, the first confirmed ascent of an 8,000-metre peak. The descent and severe injuries became part of the expedition's history.",
+            "image": { "alt": "Climber approaching a high mountain summit", "local": "assets/images/climbing/expedition-kilimanjaro.jpg" }
+        },
+        {
+            "title": "Everest · 1953",
+            "category": "Expedition milestone",
+            "text": "Tenzing Norgay and Edmund Hillary reached Everest's summit on 29 May 1953 as members of a much larger expedition. Their ascent is a team achievement, not a solo story.",
+            "image": { "alt": "Mountaineer preparing for a high mountain climb", "local": "assets/images/climbing/page-contact.jpg" }
+        },
+        {
+            "title": "Everest without bottled oxygen · 1978",
+            "category": "Expedition milestone",
+            "text": "Reinhold Messner and Peter Habeler made the first ascent of Everest without supplemental oxygen in 1978, a landmark in high-altitude mountaineering. It does not make an oxygen-free ascent a safe or suitable goal for others.",
+            "image": { "alt": "Solo mountaineer on a steep rock wall", "local": "assets/images/climbing/gallery-solo-ascent.jpg" }
+        }
+    ],
+    "organizations": [
+        {
+            "title": "UIAA",
+            "category": "International federation",
+            "text": "The International Climbing and Mountaineering Federation connects member associations worldwide and publishes equipment safety standards and climber guidance.",
+            "region": "International",
+            "image": { "alt": "Climber preparing rope and safety equipment", "local": "assets/images/climbing/guide-climber-wall.jpg" }
+        },
+        {
+            "title": "American Alpine Club",
+            "category": "Climbing organization",
+            "text": "A United States climbing organization that supports climbers through education, publications, advocacy and member resources.",
+            "region": "United States",
+            "image": { "alt": "Mountaineer crossing a snowy mountain slope", "local": "assets/images/climbing/destination-k2.jpg" }
+        },
+        {
+            "title": "British Mountaineering Council",
+            "category": "Climbing organization",
+            "text": "The BMC represents climbers, hill walkers and mountaineers in Britain and provides club, access and participation resources.",
+            "region": "United Kingdom",
+            "image": { "alt": "Mountaineer climbing a snow and rock slope", "local": "assets/images/climbing/destination-kilimanjaro.jpg" }
+        }
+    ],
+    "developments": [
+        {
+            "title": "Check certified gear and safety notices",
+            "category": "Equipment planning",
+            "text": "Safety labels and equipment notices can change. Check the exact model and current notices rather than relying on an old gear list.",
+            "image": { "alt": "Climber on a steep alpine rock face", "local": "assets/images/climbing/destination-mont-blanc.jpg" }
+        },
+        {
+            "title": "Use live mountain information",
+            "category": "Route planning",
+            "text": "Check current season reports, mountain-specific forecasts and route conditions before planning a climb.",
+            "image": { "alt": "Climber on a steep rock wall", "local": "assets/images/climbing/gallery-climber-rock.jpg" }
+        }
+    ],
+    "guidelines": [
+        {
+            "title": "Plan for the whole team",
+            "category": "Good practice",
+            "text": "Choose a route that matches the least experienced team member, check permits and local rules, share an itinerary and emergency contact, and agree on turnaround times before leaving.",
+            "image": { "alt": "Mountaineer climbing a steep mountain route", "local": "assets/images/climbing/destination-everest.jpg" }
+        },
+        {
+            "title": "Leave the mountain better",
+            "category": "Good practice",
+            "text": "Follow local waste and wildlife rules, stay on durable surfaces where advised, respect local communities and other climbers, and pack out what you bring in.",
+            "image": { "alt": "Climber on a rock route in the mountains", "local": "assets/images/climbing/page-faq.jpg" }
+        }
+    ]
+}

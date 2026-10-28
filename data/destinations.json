@@ -1,0 +1,114 @@
+[
+    {
+        "name": "Mount Everest",
+        "country": "Nepal / China",
+        "altitude": 8849,
+        "range": "Himalaya",
+        "season": "Apr–May",
+        "difficulty": "Extreme",
+        "image": {
+            "alt": "Climber silhouetted against a steep mountain rock face",
+            "credit": "Pexels",
+            "license": "Pexels License",
+            "local": "assets/images/climbing/destination-everest.jpg"
+        }
+    },
+    {
+        "name": "K2",
+        "country": "Pakistan / China",
+        "altitude": 8611,
+        "range": "Karakoram",
+        "season": "Jun–Aug",
+        "difficulty": "Extreme",
+        "image": {
+            "alt": "Mountaineer crossing a snowy mountain slope",
+            "credit": "Pexels",
+            "license": "Pexels License",
+            "local": "assets/images/climbing/destination-k2.jpg"
+        }
+    },
+    {
+        "name": "Denali",
+        "country": "USA",
+        "altitude": 6190,
+        "range": "Alaska Range",
+        "season": "May–Jul",
+        "difficulty": "Very hard",
+        "image": {
+            "alt": "Ice climber scaling a frozen waterfall",
+            "credit": "Pexels",
+            "license": "Pexels License",
+            "local": "assets/images/climbing/destination-denali.jpg"
+        }
+    },
+    {
+        "name": "Mont Blanc",
+        "country": "France / Italy",
+        "altitude": 4806,
+        "range": "Alps",
+        "season": "Jun–Sep",
+        "difficulty": "Hard",
+        "image": {
+            "alt": "Roped climber ascending an exposed alpine rock face",
+            "credit": "Pexels",
+            "license": "Pexels License",
+            "local": "assets/images/climbing/destination-mont-blanc.jpg"
+        }
+    },
+    {
+        "name": "Mount Kilimanjaro",
+        "country": "Tanzania",
+        "altitude": 5895,
+        "range": "Eastern Rift",
+        "season": "Jan–Mar, Jun–Oct",
+        "difficulty": "Moderate",
+        "image": {
+            "alt": "Mountaineer climbing a snow and rock slope",
+            "credit": "Pexels",
+            "license": "Pexels License",
+            "local": "assets/images/climbing/destination-kilimanjaro.jpg"
+        }
+    },
+    {
+        "name": "Aconcagua",
+        "country": "Argentina",
+        "altitude": 6961,
+        "range": "Andes",
+        "season": "December–February (typical)",
+        "difficulty": "Hard",
+        "image": {
+               "alt": "Climber ascending a high mountain rock face",
+               "credit": "Pexels",
+               "license": "Pexels License",
+               "local": "assets/images/climbing/expedition-aconcagua.jpg"
+        }
+    },
+    {
+        "name": "Annapurna I",
+        "country": "Nepal",
+        "altitude": 8091,
+        "range": "Himalaya",
+        "season": "Spring and autumn (typical)",
+        "difficulty": "Extreme",
+        "image": {
+               "alt": "Mountaineer approaching a steep snowy mountain slope",
+               "credit": "Pexels",
+               "license": "Pexels License",
+               "local": "assets/images/climbing/expedition-kilimanjaro.jpg"
+        }
+    },
+    {
+        "name": "Matterhorn",
+        "country": "Switzerland / Italy",
+        "altitude": 4478,
+        "range": "Alps",
+        "season": "Summer (route and conditions dependent)",
+        "difficulty": "Very hard",
+        "image": {
+               "alt": "Climber ascending a snow-covered alpine ridge",
+               "credit": "Pexels",
+               "license": "Pexels License",
+               "local": "assets/images/climbing/page-about.jpg"
+        }
+    }
+]

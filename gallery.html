@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Gallery – Alpine Ascents</title>
+    <meta name="description" content="A climbing photo gallery and short mountain video, with unique images and accessible controls.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/webp" href="assets/images/climbing/fav.webp">
+</head>
+
+<body data-page="gallery">
+    <div id="nav"></div>
+    <main>
+        <section>
+            <div class="wrap rv">
+                <h1 style="font-size:clamp(2rem,5vw,3.5rem)">Gallery</h1>
+                <div class="tools"><select id="cat" aria-label="Category">
+                        <option value="">All</option>
+                    </select></div>
+                <p>Illustrative climbing and mountain photographs. Captions describe the image; they do not identify a specific peak or expedition.</p>
+                <!-- Gallery cards use local image data and open in the accessible dialog below. -->
+                <div id="grid" class="grid" aria-live="polite">Loading…</div>
+                <dialog id="lb" aria-labelledby="cap">
+                    <figure class="lightbox-figure">
+                        <img id="lb-image" src="" alt="">
+                        <figcaption id="cap"></figcaption>
+                    </figure>
+                    <form method="dialog"><button class="btn">Close photo</button></form>
+                </dialog>
+            </div>
+        </section>
+    </main>
+    <div id="foot"></div>
+    <script src="js/media.js"></script>
+    <!-- The local assistant answers from this site's mountain-climbing data only. -->
+    <script src="js/main.js"></script>
+    <script src="js/assistant.js"></script>
+</body>
+
+</html>

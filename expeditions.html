@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Expeditions – Alpine Ascents</title>
+    <meta name="description" content="Explore mountain expeditions and climbing routes.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/webp" href="assets/images/climbing/fav.webp">
+</head>
+
+<body data-page="expeditions">
+    <div id="nav"></div>
+    <main>
+        <section>
+            <div class="wrap rv">
+                <h1 style="font-size:clamp(2rem,5vw,3.5rem)">Expeditions</h1>
+                <div class="tools"><input id="q" type="search" placeholder="Search mountain or country"
+                        aria-label="Search"><select id="diff" aria-label="Difficulty">
+                        <option value="">Any difficulty</option>
+                        <option>Moderate</option>
+                        <option>Hard</option>
+                        <option>Very hard</option>
+                        <option>Extreme</option>
+                    </select><select id="country" aria-label="Country">
+                        <option value="">Any country</option>
+                    </select><select id="dur" aria-label="Duration">
+                        <option value="0">Any duration</option>
+                        <option value="7">≤ 7 days</option>
+                        <option value="21">≤ 21 days</option>
+                        <option value="60">≤ 60 days</option>
+                    </select><select id="sort" aria-label="Sort">
+                        <option value="name">Name</option>
+                        <option value="alt">Altitude</option>
+                        <option value="dur">Duration</option>
+                    </select></div>
+                <p class="note">Altitudes are summit elevations; seasons, route difficulty and duration are indicative and vary with route, conditions and operator. Confirm current details before planning. Photos are illustrative, not identified as images of the named peak.</p>
+                <!-- Route cards are filtered and sorted from the local expedition dataset. -->
+                <div id="grid" class="grid" aria-live="polite">Loading…</div>
+            </div>
+        </section>
+    </main>
+    <div id="foot"></div>
+    <script src="js/media.js"></script>
+    <!-- The local assistant answers from this site's mountain-climbing data only. -->
+    <script src="js/main.js"></script>
+    <script src="js/assistant.js"></script>
+</body>
+
+</html>

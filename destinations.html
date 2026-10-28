@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Destinations – Alpine Ascents</title>
+    <meta name="description" content="Famous mountains and general facts.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/webp" href="assets/images/climbing/fav.webp">
+</head>
+
+<body data-page="destinations">
+    <div id="nav"></div>
+    <main>
+        <section>
+            <div class="wrap rv">
+                <h1 style="font-size:clamp(2rem,5vw,3.5rem)">Destinations</h1>
+                <p>Explore mountain profiles and compare the terrain, altitude and typical seasons. Photos are illustrative climbing images; they do not claim to show the named summit.</p>
+                <div class="tools"><input id="q" type="search" placeholder="Search destinations" aria-label="Search">
+                </div>
+                <!-- Destination cards and search results are rendered from local JSON data. -->
+                <div id="grid" class="grid" aria-live="polite">Loading…</div>
+            </div>
+        </section>
+    </main>
+    <div id="foot"></div>
+    <script src="js/media.js"></script>
+    <!-- The local assistant answers from this site's mountain-climbing data only. -->
+    <script src="js/main.js"></script>
+    <script src="js/assistant.js"></script>
+</body>
+
+</html>

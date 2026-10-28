@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Contact – Alpine Ascents</title>
+    <meta name="description" content="Contact page demo for the Alpine Ascents mountaineering information website.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/webp" href="assets/images/climbing/fav.webp">
+</head>
+
+<body data-page="contact">
+    <div id="nav"></div>
+    <main>
+        <section>
+            <div class="wrap rv">
+                <h1 style="font-size:clamp(2rem,5vw,3.5rem)">Contact</h1>
+                <p>Questions about route research? Use this form to preview the contact flow.</p>
+                <p class="note">This is a front-end demonstration. The form is not connected to an email service, and submitting it will not send or store a message.</p>
+                <!-- This demonstration form is not connected to email or data storage. -->
+                <form data-form novalidate>
+                    <div><label for="n">Full name</label><input id="n" name="n" type="text" required><span
+                            class="err"></span></div>
+                    <div><label for="e">Email</label><input id="e" name="e" type="email" required><span
+                            class="err"></span></div>
+                    <div><label for="m">Message</label><textarea id="m" rows="4"></textarea></div><button
+                        class="btn pri">Send message</button>
+                    <p class="ok" role="status"></p>
+                </form>
+                <h2>Helpful places to start</h2>
+                <div class="grid contact-grid">
+                    <article class="card">
+                        <div class="ph"><img src="assets/images/climbing/guide-climber-wall.jpg" alt="Climber practicing movement on a rock wall" loading="lazy"></div>
+                        <div class="body"><h3>Find a local community</h3><p>Use the optional location search to look for mapped clubs near you.</p><a class="btn" href="mountaineering.html#field-organizations">Find a club</a></div>
+                    </article>
+                    <article class="card">
+                        <div class="ph"><img src="assets/images/climbing/expedition-k2.jpg" alt="Mountaineer moving on a snow-covered slope" loading="lazy"></div>
+                        <div class="body"><h3>Review route details</h3><p>Compare route summaries and confirm current conditions before making a plan.</p><a class="btn" href="expeditions.html">Browse routes</a></div>
+                    </article>
+                    <article class="card">
+                        <div class="ph"><img src="assets/images/climbing/page-safety.jpg" alt="Mountaineer ascending a snowy ridge" loading="lazy"></div>
+                        <div class="body"><h3>Prepare thoughtfully</h3><p>Use the safety notes as prompts for a route-specific plan.</p><a class="btn" href="safety.html">Read safety notes</a></div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+    <div id="foot"></div>
+    <script src="js/media.js"></script>
+    <!-- The local assistant answers from this site's mountain-climbing data only. -->
+    <script src="js/main.js"></script>
+    <script src="js/assistant.js"></script>
+</body>
+
+</html>

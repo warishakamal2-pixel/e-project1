@@ -1,0 +1,155 @@
+[
+    {
+        "id": "everest",
+        "name": "Mount Everest",
+        "country": "Nepal / China (Tibet)",
+        "altitude": 8849,
+        "difficulty": "Extreme",
+        "days": 60,
+        "season": "April–May (typical)",
+        "cost": null,
+        "overview": "The world's highest mountain. Requires prior high-altitude experience, supplemental oxygen planning and extensive permits.",
+        "image": {
+            "alt": "Climber in red ascending a snowy mountain peak",
+            "credit": "Pexels",
+            "license": "Pexels License",
+            "local": "assets/images/climbing/expedition-everest.jpg"
+        }
+    },
+    {
+        "id": "k2",
+        "name": "K2",
+        "country": "Pakistan / China",
+        "altitude": 8611,
+        "difficulty": "Extreme",
+        "days": 60,
+        "season": "June–August (typical)",
+        "cost": null,
+        "overview": "One of the most technically demanding 8,000 m peaks, with a serious fatality record. Expert-level only.",
+        "image": {
+         "alt": "Mountaineer climbing a steep snow slope with a rope",
+         "credit": "Pexels",
+         "license": "Pexels License",
+         "local": "assets/images/climbing/expedition-k2.jpg"
+        }
+    },
+    {
+        "id": "denali",
+        "name": "Denali",
+        "country": "United States (Alaska)",
+        "altitude": 6190,
+        "difficulty": "Very hard",
+        "days": 21,
+        "season": "May–July (typical)",
+        "cost": null,
+        "overview": "North America's highest peak: extreme cold, glacier travel and heavy loads. NPS registration and fees apply.",
+        "image": {
+         "alt": "Mountaineer climbing a snowy slope in winter gear",
+         "credit": "Pexels",
+         "license": "Pexels License",
+         "local": "assets/images/climbing/expedition-denali.jpg"
+        }
+    },
+    {
+        "id": "aconcagua",
+        "name": "Aconcagua",
+        "country": "Argentina",
+        "altitude": 6961,
+        "difficulty": "Hard",
+        "days": 18,
+        "season": "December–February (typical)",
+        "cost": null,
+        "overview": "Highest peak outside Asia. Non-technical by the normal route but a serious high-altitude objective. Permit required.",
+        "image": {
+         "alt": "Climber ascending a rugged outdoor rock face",
+         "credit": "Pexels",
+         "license": "Pexels License",
+         "local": "assets/images/climbing/expedition-aconcagua.jpg"
+        }
+    },
+    {
+        "id": "kilimanjaro",
+        "name": "Mount Kilimanjaro",
+        "country": "Tanzania",
+        "altitude": 5895,
+        "difficulty": "Moderate",
+        "days": 8,
+        "season": "January–March, June–October (typical)",
+        "cost": null,
+        "overview": "A walk-up high-altitude trek where altitude sickness remains the main risk. Park fees and licensed operators required.",
+        "image": {
+         "alt": "Mountaineer climbing a snow-covered rocky ridge",
+         "credit": "Pexels",
+         "license": "Pexels License",
+         "local": "assets/images/climbing/expedition-kilimanjaro.jpg"
+        }
+    },
+    {
+        "id": "mont-blanc",
+        "name": "Mont Blanc",
+        "country": "France / Italy",
+        "altitude": 4806,
+        "difficulty": "Hard",
+        "days": 5,
+        "season": "June–September (typical)",
+        "cost": null,
+        "overview": "Western Europe's highest summit. Glacier travel, rockfall and fast-changing weather; acclimatization and guiding strongly advised.",
+        "image": {
+         "alt": "Climber on a steep alpine rock face",
+         "credit": "Pexels",
+         "license": "Pexels License",
+         "local": "assets/images/climbing/expedition-mont-blanc.jpg"
+        }
+    },
+    {
+        "id": "annapurna-i",
+        "name": "Annapurna I",
+        "country": "Nepal",
+        "altitude": 8091,
+        "difficulty": "Extreme",
+        "days": 45,
+        "season": "Spring and autumn (typical; conditions vary)",
+        "cost": null,
+        "overview": "An 8,000-metre Himalayan objective with serious avalanche, weather and altitude hazards. This is an expert mountaineering expedition, not a trekking route.",
+        "image": {
+            "alt": "Mountaineer moving across snow and rock on a high mountain",
+            "credit": "Pexels",
+            "license": "Pexels License",
+            "local": "assets/images/climbing/destination-everest.jpg"
+        }
+    },
+    {
+        "id": "lhotse",
+        "name": "Lhotse",
+        "country": "Nepal / China (Tibet)",
+        "altitude": 8516,
+        "difficulty": "Extreme",
+        "days": 50,
+        "season": "April–May (typical; conditions vary)",
+        "cost": null,
+        "overview": "The world's fourth-highest mountain lies beside Everest in the Himalaya. Its high-altitude terrain requires extensive expedition experience, acclimatization and current permit information.",
+        "image": {
+            "alt": "Mountaineer on a cold-weather snow and ice route",
+            "credit": "Pexels",
+            "license": "Pexels License",
+            "local": "assets/images/climbing/destination-kilimanjaro.jpg"
+        }
+    },
+    {
+        "id": "matterhorn",
+        "name": "Matterhorn",
+        "country": "Switzerland / Italy",
+        "altitude": 4478,
+        "difficulty": "Very hard",
+        "days": 5,
+        "season": "Summer (route and conditions dependent)",
+        "cost": null,
+        "overview": "A prominent alpine summit with exposed rock and mixed climbing. Conditions change quickly; route choice and ascent suitability depend on current conditions and the team's technical experience.",
+        "image": {
+            "alt": "Climber progressing on a steep alpine rock face",
+            "credit": "Pexels",
+            "license": "Pexels License",
+            "local": "assets/images/climbing/destination-mont-blanc.jpg"
+        }
+    }
+]

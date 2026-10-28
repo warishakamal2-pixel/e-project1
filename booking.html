@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Booking enquiry – Alpine Ascents</title>
+    <meta name="description" content="Booking enquiry form demonstration for Alpine Ascents expedition route research.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/webp" href="assets/images/climbing/fav.webp">
+</head>
+
+<body data-page="booking">
+    <div id="nav"></div>
+    <main>
+        <section>
+            <div class="wrap rv">
+                <h1 style="font-size:clamp(2rem,5vw,3.5rem)">Booking enquiry</h1>
+                <p>Use the form to explore an expedition enquiry. No trip, guide or reservation is offered or confirmed by this website.</p>
+                <p class="note">This form is a front-end demonstration only. It does not send or save your details. Confirm operators, current prices, permits, insurance and cancellation terms independently before making travel plans.</p>
+                <!-- This front-end demonstration validates fields but never submits a booking. -->
+                <form data-form novalidate>
+                    <div><label for="n">Full name</label><input id="n" name="n" type="text" required><span
+                            class="err"></span></div>
+                    <div><label for="e">Email</label><input id="e" name="e" type="email" required><span
+                            class="err"></span></div>
+                    <div><label for="exp">Expedition</label><select id="exp" required></select><span class="err"></span>
+                    </div>
+                    <div><label for="d">Preferred dates</label><input id="d" name="d" type="text" required><span
+                            class="err"></span></div>
+                    <div><label for="g">Group size</label><input id="g" name="g" type="number" required><span
+                            class="err"></span></div>
+                    <div><label for="m">Message</label><textarea id="m" rows="4"></textarea></div><button
+                        class="btn pri">Send enquiry</button>
+                    <p class="ok" role="status"></p>
+                </form>
+                <h2>Before planning a real trip</h2>
+                <div class="grid booking-grid">
+                    <article class="card">
+                        <div class="ph"><img src="assets/images/climbing/expedition-everest.jpg" alt="Climber ascending a steep snowy mountain slope" loading="lazy"></div>
+                        <div class="body"><h3>Check route fit</h3><p>Match the objective to your team's experience, skills and health.</p><a class="btn" href="mountaineering.html#field-styles">Compare climbing styles</a></div>
+                    </article>
+                    <article class="card">
+                        <div class="ph"><img src="assets/images/climbing/expedition-denali.jpg" alt="Mountaineer crossing a snowy slope" loading="lazy"></div>
+                        <div class="body"><h3>Confirm current details</h3><p>Ask the relevant authority and operator about permits, dates, fees and local rules.</p><a class="btn" href="destinations.html">Explore destinations</a></div>
+                    </article>
+                    <article class="card">
+                        <div class="ph"><img src="assets/images/climbing/gallery-climber-ridge.jpg" alt="Climber on an exposed rock route" loading="lazy"></div>
+                        <div class="body"><h3>Plan for safety</h3><p>Review health, acclimatization, insurance and an emergency plan with qualified people.</p><a class="btn" href="safety.html">Read safety guidance</a></div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+    <div id="foot"></div>
+    <script src="js/media.js"></script>
+    <!-- The local assistant answers from this site's mountain-climbing data only. -->
+    <script src="js/main.js"></script>
+    <script src="js/assistant.js"></script>
+</body>
+
+</html>

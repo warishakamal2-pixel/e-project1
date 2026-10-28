@@ -1,0 +1,52 @@
+[
+    {
+        "q": "How do I prepare for a high-altitude climb?",
+        "a": "Build aerobic endurance and strength over months, gain relevant mountain experience on smaller peaks, and plan staged acclimatization.",
+        "image": { "alt": "Mountaineer ascending a snowy ridge", "local": "assets/images/climbing/page-safety.jpg" }
+    },
+    {
+        "q": "What is altitude sickness?",
+        "a": "Acute mountain sickness can cause headache, nausea and fatigue. Worsening symptoms mean descend and seek medical help; HAPE and HACE are life-threatening.",
+        "image": { "alt": "Mountaineer moving through a high mountain landscape", "local": "assets/images/climbing/expedition-kilimanjaro.jpg" }
+    },
+    {
+        "q": "Do I need permits?",
+        "a": "Many major peaks require permits or registration (for example, Denali through the U.S. National Park Service). Requirements and fees change; always confirm with the official authority.",
+        "image": { "alt": "Mountaineer on a steep snowy mountain route", "local": "assets/images/climbing/expedition-everest.jpg" }
+    },
+    {
+        "q": "What are the costs and cancellation terms?",
+        "a": "Costs and cancellation terms vary by route and operator. Confirm current details before booking.",
+        "image": { "alt": "Climbing equipment prepared for an expedition", "local": "assets/images/climbing/page-booking.jpg" }
+    },
+    {
+        "q": "How does booking work?",
+        "a": "The enquiry form is not connected and does not send messages. Confirm bookings directly with the operator.",
+        "image": { "alt": "Climber on a mountain route", "local": "assets/images/climbing/page-contact.jpg" }
+    },
+    {
+        "q": "What climbing styles are there?",
+        "a": "Styles depend on terrain and expedition logistics. Alpine-style teams aim to move with what they carry; expedition-style trips may use a base camp and staged camps. Neither style removes objective hazards.",
+        "image": { "alt": "Roped climber moving up a rock face", "local": "assets/images/climbing/guide-alpine-climber.jpg" }
+    },
+    {
+        "q": "What should I do if altitude symptoms get worse?",
+        "a": "Do not ascend. Worsening symptoms at rest, confusion or breathlessness require urgent descent and medical care. Read current CDC guidance and discuss health concerns with a qualified clinician.",
+        "image": { "alt": "Mountaineer crossing an icy mountain slope", "local": "assets/images/climbing/destination-denali.jpg" }
+    },
+    {
+        "q": "Can I find a local climbing club?",
+        "a": "Use the optional location search on the Mountaineering page to look for mapped climbing or mountaineering clubs nearby. Results depend on OpenStreetMap community data and may be incomplete.",
+        "image": { "alt": "Climber practicing movement on a rock wall", "local": "assets/images/climbing/guide-climber-wall.jpg" }
+    },
+    {
+        "q": "Are the expedition dates, durations and difficulty ratings guarantees?",
+        "a": "No. Seasons and durations are indicative summaries; conditions, itineraries, permits and difficulty vary by route and operator. Verify current details with official authorities and a qualified guide.",
+        "image": { "alt": "Climber ascending an alpine mountain face", "local": "assets/images/climbing/destination-everest.jpg" }
+    },
+    {
+        "q": "Where can I check whether climbing equipment is certified?",
+        "a": "The UIAA provides a public search database for equipment carrying the UIAA Safety Label. Check the current database and product notices before a trip.",
+        "image": { "alt": "Climber wearing a harness on a rock climbing route", "local": "assets/images/climbing/gallery-climber-harness.jpg" }
+    }
+]

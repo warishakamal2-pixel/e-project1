@@ -1,0 +1,122 @@
+[
+    {
+        "cat": "Rock climbing",
+        "caption": "Climber tackling a steep rock face",
+        "image": {
+            "alt": "Climber tackling a steep rock face",
+            "credit": "Pexels",
+            "license": "Pexels License",
+            "local": "assets/images/climbing/gallery-climber-rock.jpg"
+        }
+    },
+    {
+        "cat": "Alpine climbing",
+        "caption": "Climber on a jagged rock formation at sunrise",
+        "image": {
+            "alt": "Climber on a jagged rock formation at sunrise",
+            "credit": "Pexels",
+            "license": "Pexels License",
+            "local": "assets/images/climbing/gallery-climber-sunrise.jpg"
+        }
+    },
+    {
+        "cat": "Alpine climbing",
+        "caption": "Solo climber ascending a dramatic rock face",
+        "image": {
+            "alt": "Solo climber ascending a dramatic rock face",
+            "credit": "Pexels",
+            "license": "Pexels License",
+            "local": "assets/images/climbing/gallery-solo-ascent.jpg"
+        }
+    },
+    {
+        "cat": "Rock climbing",
+        "caption": "Climber ascending a steep rock face on a mountainside",
+        "image": {
+            "alt": "Climber ascending a steep rock face on a mountainside",
+            "credit": "Pexels",
+            "license": "Pexels License",
+            "local": "assets/images/climbing/gallery-climber-ridge.jpg"
+        }
+    },
+    {
+        "cat": "Alpine climbing",
+        "caption": "Climber ascending a mountain with safety gear",
+        "image": {
+            "alt": "Climber ascending a mountain with safety gear",
+            "credit": "Pexels",
+            "license": "Pexels License",
+            "local": "assets/images/climbing/gallery-climber-harness.jpg"
+        }
+    },
+    {
+        "cat": "Rock climbing",
+        "caption": "Climber scaling a large outdoor rock",
+        "image": {
+            "alt": "Climber scaling a large outdoor rock",
+            "credit": "Pexels",
+            "license": "Pexels License",
+            "local": "assets/images/climbing/gallery-climber-rock-outdoors.jpg"
+        }
+    },
+    {
+        "cat": "Snow and ice",
+        "caption": "Roped climber ascending a steep snow slope",
+        "image": {
+               "alt": "Roped climber ascending a steep snow slope",
+               "credit": "Pexels",
+               "license": "Pexels License",
+               "local": "assets/images/climbing/expedition-everest.jpg"
+        }
+    },
+    {
+        "cat": "Snow and ice",
+        "caption": "Climber crossing a snowy ridge under a clear sky",
+        "image": {
+               "alt": "Climber crossing a snowy ridge under a clear sky",
+               "credit": "Pexels",
+               "license": "Pexels License",
+               "local": "assets/images/climbing/expedition-k2.jpg"
+        }
+    },
+    {
+        "cat": "Snow and ice",
+        "caption": "Mountaineer climbing toward the morning light",
+        "image": {
+               "alt": "Mountaineer climbing toward the morning light",
+               "credit": "Pexels",
+               "license": "Pexels License",
+               "local": "assets/images/climbing/expedition-denali.jpg"
+        }
+    },
+    {
+        "cat": "Alpine climbing",
+        "caption": "Climber moving up mixed mountain terrain",
+        "image": {
+               "alt": "Climber moving up mixed mountain terrain",
+               "credit": "Pexels",
+               "license": "Pexels License",
+               "local": "assets/images/climbing/expedition-aconcagua.jpg"
+        }
+    },
+    {
+        "cat": "Alpine climbing",
+        "caption": "Alpine climber approaching a snowy ridge",
+        "image": {
+               "alt": "Alpine climber approaching a snowy ridge",
+               "credit": "Pexels",
+               "license": "Pexels License",
+               "local": "assets/images/climbing/expedition-mont-blanc.jpg"
+        }
+    },
+    {
+        "cat": "High-altitude trekking",
+        "caption": "Climber on a high-altitude trail",
+        "image": {
+               "alt": "Climber on a high-altitude trail",
+               "credit": "Pexels",
+               "license": "Pexels License",
+               "local": "assets/images/climbing/expedition-kilimanjaro.jpg"
+        }
+    }
+]
