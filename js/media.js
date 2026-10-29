@@ -2,9 +2,7 @@ const HOME_MEDIA = {
   video: 'assets/videos/mountain-climb.mp4',
   poster: {
     local: 'assets/images/climbing/home-climbing-poster.jpg',
-    alt: 'Climber scaling a steep rock face',
-    credit: 'Pexels',
-    license: 'Pexels License'
+    alt: 'Climber scaling a steep rock face'
   }
 };
 
@@ -32,9 +30,6 @@ const PAGE_PHOTOS = {
 };
 
 const imgSrc = m => (m ? (m.local || m.url || '') : '');
-const credit = m => (m && m.credit
-  ? `<small class="credit">Photo: ${esc(m.credit)} · ${esc(m.license)}</small>`
-  : '');
 
 function pagePhoto() {
   const photo = PAGE_PHOTOS[document.body.dataset.page];
@@ -59,8 +54,6 @@ function heroMedia() {
     hero.style.backgroundSize = 'cover';
     hero.style.backgroundPosition = 'center';
     hero.classList.add('hasimg');
-    const videoCredit = credit(poster).replace('Photo:', 'Video and poster:');
-    hero.insertAdjacentHTML('beforeend', videoCredit.replace('class="credit"', 'class="credit herocredit"'));
   };
   probe.onerror = () => {
     hero.style.backgroundImage = `linear-gradient(#33241912 40%,#332419df),url("${poster.local}")`;

@@ -8,7 +8,7 @@ const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '
 const fail = (el, m) => el && (el.innerHTML = `<p class="note" role="alert">${m || 'Could not load data. Run via a local server (e.g. VS Code Live Server), not file://.'}</p>`);
 const cur = (location.pathname.split('/').pop() || 'index.html').replace('.html', '');
 // Keep every destination available; phones use a menu button while tablets retain the swipeable link rail.
-$('#nav').innerHTML = `<header><div class="wrap"><div class="brand-group"><a class="logo" href="index.html" aria-label="Alpine Ascents home"><img src="assets/images/climbing/fav.webp" alt=""><span>Alpine</span>Ascents</a><div class="visit-counter" title="A count saved in this browser only"><small>LOCAL VISITS</small><strong id="visit-count">—</strong></div></div><nav id="primary-navigation" class="site-nav" aria-label="Main navigation"><ul>${PAGES.map(([p, t]) => `<li><a href="${p}.html"${p === cur ? ' aria-current="page"' : ''}>${t}</a></li>`).join('')}<li><a class="btn pri" href="booking.html">Plan a trip</a></li></ul></nav><button id="menu" class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-navigation"><span></span><span></span><span></span></button></div></header>`;
+$('#nav').innerHTML = `<header><div class="wrap"><div class="brand-group"><a class="logo" href="index.html" aria-label="Alpine Ascents home"><img src="assets/images/climbing/alpine-mark.svg" alt=""><span>Alpine</span>Ascents</a><div class="visit-counter" title="A count saved in this browser only"><small>LOCAL VISITS</small><strong id="visit-count">—</strong></div></div><nav id="primary-navigation" class="site-nav" aria-label="Main navigation"><ul>${PAGES.map(([p, t]) => `<li><a href="${p}.html"${p === cur ? ' aria-current="page"' : ''}>${t}</a></li>`).join('')}<li><a class="btn pri" href="booking.html">Plan a trip</a></li></ul></nav><button id="menu" class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-navigation"><span></span><span></span><span></span></button></div></header>`;
 const navButton = $('#menu');
 const siteNav = $('.site-nav');
 const setNavigationOpen = open => {
@@ -42,10 +42,14 @@ $('#foot').innerHTML = `
          <div class="footer-main">
             <div class="footer-brand">
                <a class="footer-brand-mark" href="index.html">
-                  <img src="assets/images/climbing/fav.webp" alt="">
+                  <img src="assets/images/climbing/alpine-mark.svg" alt="">
                   <span>Alpine</span> Ascents
                </a>
                <p>An independent field guide for thoughtful mountain travel, climbing knowledge and better-prepared decisions.</p>
+               <a class="footer-contact" href="tel:+12025550147">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7.1 3.8 9.4 3l2 4.2-1.8 1.6a14 14 0 0 0 5.6 5.6l1.6-1.8 4.2 2-.8 2.3a3 3 0 0 1-3.2 1.9A16.9 16.9 0 0 1 5.2 7a3 3 0 0 1 1.9-3.2Z"/></svg>
+                  <span><strong>Field guide enquiries</strong><small>Example contact line · +1 (202) 555-0147</small></span>
+               </a>
             </div>
             <nav class="footer-links" aria-label="Explore the mountains">
                <h2>Explore</h2>
@@ -87,7 +91,7 @@ $('#foot').innerHTML = `
       <span id="live-location">Location not shared</span>
       <span class="ticker-marquee" aria-hidden="true"><span>LEAVE NO TRACE&nbsp; · &nbsp;CHECK LOCAL CONDITIONS&nbsp; · &nbsp;LOOK OUT FOR YOUR TEAM&nbsp; · &nbsp;LEAVE NO TRACE&nbsp; · &nbsp;CHECK LOCAL CONDITIONS&nbsp; · &nbsp;LOOK OUT FOR YOUR TEAM&nbsp; · &nbsp;</span></span>
    </div>
-   <button id="top" aria-label="Back to top">↑</button>`;
+   <button id="top" aria-label="Back to top"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 19V5m0 0 6 6m-6-6-6 6"/></svg></button>`;
 $('#top').onclick = () => scrollTo({ top: 0 }); addEventListener('scroll', () => $('#top').style.display = scrollY > 600 ? 'block' : 'none');
 const liveNow = $('#live-now');
 // Refresh the local clock without repeatedly changing the page layout.
@@ -121,8 +125,8 @@ $('#ticker-location').onclick = () => {
 // Animate only marked content entering the viewport; reduced-motion users get the CSS fallback.
 const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting && (e.target.classList.add('in'), io.unobserve(e.target))));
 const reveal = () => $$('.rv:not(.in)').forEach(e => io.observe(e)); reveal();
-// Read each photo from its local file and show its plain-text photographer/license credit.
-const ph = (n, m) => `<div class="ph"><img src="${esc(imgSrc(m))}" alt="${esc(m.alt || n)}" loading="lazy" decoding="async" onerror="this.remove()"></div>${credit(m)}`;
+// Keep photo sourcing metadata in the dataset without adding repetitive labels below every card.
+const ph = (n, m) => `<div class="ph"><img src="${esc(imgSrc(m))}" alt="${esc(m.alt || n)}" loading="lazy" decoding="async" onerror="this.remove()"></div>`;
 const card = e => `<article class="card rv">${ph(e.name, e.image)}<div class="body"><span class="tag">${esc(e.difficulty)}</span><h3>${esc(e.name)}</h3><dl><dt>Country</dt><dd>${esc(e.country)}</dd><dt>Altitude</dt><dd>${Number(e.altitude).toLocaleString()} m</dd><dt>Typical duration</dt><dd>~${Number(e.days)} days</dd><dt>Season</dt><dd>${esc(e.season)}</dd></dl><a class="btn" href="expedition-details.html?id=${encodeURIComponent(e.id)}">Route details</a></div></article>`;
 const P = document.body.dataset.page;
 if (P === 'home') heroMedia();
@@ -175,11 +179,51 @@ else pagePhoto();
       } catch { fail(a) }
    }
    if (P === 'destinations') { try { const all = await load('destinations'), r = () => { const q = $('#q').value.toLowerCase(); g.innerHTML = all.filter(d => (d.name + d.country + d.range).toLowerCase().includes(q)).map(d => `<article class="card rv">${ph(d.name, d.image)}<div class="body"><h3>${esc(d.name)}</h3><dl><dt>Country</dt><dd>${esc(d.country)}</dd><dt>Range</dt><dd>${esc(d.range)}</dd><dt>Altitude</dt><dd>${Number(d.altitude).toLocaleString()} m</dd><dt>Season</dt><dd>${esc(d.season)}</dd><dt>Difficulty</dt><dd>${esc(d.difficulty)}</dd></dl><p>Plan acclimatization and gain relevant experience before climbing.</p></div></article>`).join('') || '<p>No destinations match your search.</p>'; reveal() }; $('#q').oninput = r; r() } catch { fail(g) } }
-   if (P === 'guides') { try { g.innerHTML = (await load('guides')).map(x => `<article class="card rv">${ph(x.name, x.image)}<div class="body"><h3>${esc(x.name)}</h3><span class="tag">${esc(x.role)}</span><p>${esc(x.bio)}</p><a class="text-link" href="mountaineering.html#field-techniques">Explore field guide ↗</a></div></article>`).join(''); reveal() } catch { fail(g) } }
+   if (P === 'guides') { try { g.innerHTML = (await load('guides')).map(x => `<article class="card rv">${ph(x.name, x.image)}<div class="body"><h3>${esc(x.name)}</h3><span class="tag">${esc(x.role)}</span><p>${esc(x.bio)}</p><a class="text-link" href="mountaineering.html#field-techniques">Explore field guide <span class="icon-external" aria-hidden="true"></span></a></div></article>`).join(''); reveal() } catch { fail(g) } }
    if (P === 'gallery') {
       try {
-         const all = await load('gallery'), dlg = $('#lb'); $('#cat').innerHTML += [...new Set(all.map(x => x.cat))].map(c => `<option>${c}</option>`).join('');
-         const r = () => { const visible = all.filter(x => !$('#cat').value || x.cat === $('#cat').value); g.innerHTML = visible.map((x, i) => `<article class="card gallery-card">${ph(x.caption, x.image)}<div class="body"><h3>${esc(x.caption)}</h3><button class="btn gallery-trigger" type="button" data-index="${i}">View photo <span aria-hidden="true">↗</span></button></div></article>`).join('') || '<p>No gallery photos match this category.</p>'; $$('.gallery-trigger', g).forEach(b => b.onclick = () => { const entry = visible[Number(b.dataset.index)]; $('#cap').textContent = entry.caption; $('#lb-image').src = imgSrc(entry.image); $('#lb-image').alt = entry.image.alt || entry.caption; dlg.showModal() }) }; $('#cat').onchange = r; r(); dlg.onclick = e => e.target === dlg && dlg.close()
+         const all = await load('gallery');
+         const dlg = $('#lb');
+         $('#cat').innerHTML += [...new Set(all.map(item => item.cat))]
+            .map(category => `<option>${esc(category)}</option>`).join('');
+
+         const openPhoto = entry => {
+            $('#cap').textContent = entry.caption;
+            $('#lb-image').src = imgSrc(entry.image);
+            $('#lb-image').alt = entry.image.alt || entry.caption;
+            dlg.showModal();
+         };
+
+         const renderGallery = () => {
+            const visible = all.filter(item => !$('#cat').value || item.cat === $('#cat').value);
+            g.innerHTML = visible.map((item, index) => `
+               <article class="card gallery-card">
+                  ${ph(item.caption, item.image)}
+                  <div class="body">
+                     <h3>${esc(item.caption)}</h3>
+                     <button class="btn gallery-trigger" type="button" data-index="${index}">
+                        View photo <span class="icon-external" aria-hidden="true"></span>
+                     </button>
+                  </div>
+               </article>`).join('') || '<p>No gallery photos match this category.</p>';
+            $$('.gallery-trigger', g).forEach(button => {
+               button.addEventListener('click', () => openPhoto(visible[Number(button.dataset.index)]));
+            });
+         };
+
+         $('#cat').addEventListener('change', renderGallery);
+         $('#lb-close').addEventListener('click', () => dlg.close());
+         dlg.addEventListener('click', event => {
+            if (event.target === dlg) dlg.close();
+         });
+         dlg.addEventListener('cancel', event => {
+            event.preventDefault();
+            dlg.close();
+         });
+         document.addEventListener('keydown', event => {
+            if (event.key === 'Escape' && dlg.open) dlg.close();
+         });
+         renderGallery();
       } catch { fail(g) }
    }
    if (P === 'faq') { const f = $('#faq'); try { f.innerHTML = (await load('faqs')).map((x, i) => `<article class="faq-item"><button aria-expanded="false" aria-controls="a${i}"><img src="${esc(imgSrc(x.image))}" alt="" loading="lazy" decoding="async"><span class="faq-question">${esc(x.q)}</span><span class="faq-toggle" aria-hidden="true">+</span></button><div class="a" id="a${i}">${esc(x.a)}</div></article>`).join(''); $$('button', f).forEach(b => b.onclick = () => { const o = b.classList.toggle('open'); b.setAttribute('aria-expanded', o); $('.faq-toggle', b).textContent = o ? '−' : '+' }) } catch { fail(f) } }
@@ -224,7 +268,7 @@ else pagePhoto();
                const lon = Number(position.coords.longitude.toFixed(2));
                const bbox = `${lon - 0.18},${lat - 0.18},${lon + 0.18},${lat + 0.18}`;
                const mapUrl = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${lat},${lon}`;
-               map.innerHTML = `<iframe title="OpenStreetMap around the approximate shared location" src="${esc(mapUrl)}" loading="lazy" referrerpolicy="no-referrer"></iframe><a href="https://www.openstreetmap.org/?mlat=${lat}&mlon=${lon}#map=11/${lat}/${lon}" target="_blank" rel="noopener noreferrer">Open larger map ↗</a>`;
+               map.innerHTML = `<iframe title="OpenStreetMap around the approximate shared location" src="${esc(mapUrl)}" loading="lazy" referrerpolicy="no-referrer"></iframe><a href="https://www.openstreetmap.org/?mlat=${lat}&mlon=${lon}#map=11/${lat}/${lon}" target="_blank" rel="noopener noreferrer">Open larger map <span class="icon-external" aria-hidden="true"></span></a>`;
                status.textContent = `Searching within about 30 km of ${lat.toFixed(2)}°, ${lon.toFixed(2)}°…`;
                const query = `[out:json][timeout:20];(node(around:30000,${lat},${lon})[club~"climbing|mountaineering"];way(around:30000,${lat},${lon})[club~"climbing|mountaineering"];relation(around:30000,${lat},${lon})[club~"climbing|mountaineering"];node(around:30000,${lat},${lon})[sport=mountaineering];way(around:30000,${lat},${lon})[sport=mountaineering];);out center tags;`;
                try {
@@ -242,7 +286,7 @@ else pagePhoto();
                   }
                   results.innerHTML = `<h3>Mapped clubs nearby</h3>${entries.slice(0, 8).map(entry => {
                      const point = entry.center || entry;
-                     return `<a href="https://www.openstreetmap.org/?mlat=${point.lat}&mlon=${point.lon}#map=16/${point.lat}/${point.lon}" target="_blank" rel="noopener noreferrer">${esc(entry.tags.name)} <span>↗</span></a>`;
+                     return `<a href="https://www.openstreetmap.org/?mlat=${point.lat}&mlon=${point.lon}#map=16/${point.lat}/${point.lon}" target="_blank" rel="noopener noreferrer">${esc(entry.tags.name)} <span class="icon-external" aria-hidden="true"></span></a>`;
                   }).join('')}`;
                   status.textContent = `${Math.min(entries.length, 8)} mapped result${entries.length === 1 ? '' : 's'} shown. Confirm details with each club.`;
                } catch (error) {
@@ -268,6 +312,6 @@ else pagePhoto();
          if (!v) m = 'Required.'; else if (i.type === 'email' && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)) m = 'Enter a valid email.'; else if (i.type === 'number' && (+v < 1 || +v > 20)) m = 'Enter 1–20.';
          if (er) er.textContent = m; i.setAttribute('aria-invalid', !!m); bad += !!m
       });
-      $('.ok', f).textContent = bad ? '' : 'This form is not connected. Your message was not sent.'
+      $('.ok', f).textContent = bad ? '' : 'Your message was not sent because this form is not connected to a mail service.';
    });
 })();

@@ -43,8 +43,13 @@
   panel.hidden = true;
   panel.innerHTML = `
     <header class="assistant-header">
-      <div><span class="assistant-kicker">YOUR CLIMBING COMPANION</span><h2 id="assistant-title">Mountain climbing assistant</h2></div>
-      <button class="assistant-close" type="button" aria-label="Close mountain assistant">×</button>
+      <div class="assistant-brand">
+        <span class="assistant-avatar" aria-hidden="true">
+          <svg viewBox="0 0 48 48" focusable="false"><circle cx="24" cy="24" r="23" fill="#dda56b"/><path d="m4 36 11-16 6 8 6-13 17 21H4Z" fill="#3e503f"/><path d="m21 28 6-13 6 10-5-2-2 4-2-3-3 4Z" fill="#fffdf2"/></svg>
+        </span>
+        <span class="assistant-brand-copy"><span class="assistant-kicker">YOUR LOCAL MOUNTAIN COMPANION</span><h2 id="assistant-title">Summit Guide AI</h2><span class="assistant-status">Ready when you are</span></span>
+      </div>
+      <button class="assistant-close" type="button" aria-label="Close mountain assistant"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
     </header>
     <p class="assistant-disclaimer">Answers use this site’s climbing guides and data. No live conditions, medical diagnosis or emergency support.</p>
     <div class="assistant-messages" role="log" aria-live="polite" aria-relevant="additions text"></div>
@@ -56,7 +61,7 @@
     <form class="assistant-form">
       <label class="assistant-visually-hidden" for="assistant-question">Ask a mountain-climbing question</label>
       <input id="assistant-question" name="question" type="text" maxlength="400" autocomplete="off" placeholder="Ask about mountain climbing…" required>
-      <button type="submit" aria-label="Send question">Ask</button>
+      <button type="submit" aria-label="Send question">Send <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15m0 0-6-6m6 6-6 6"/></svg></button>
     </form>`;
 
   const launcher = document.createElement('button');
@@ -261,6 +266,7 @@
 
   function setOpen(open) {
     panel.hidden = !open;
+    panel.classList.toggle('is-open', open);
     launcher.setAttribute('aria-expanded', String(open));
     if (open) input.focus();
     else launcher.focus();
@@ -279,5 +285,5 @@
     if (event.key === 'Escape' && !panel.hidden) setOpen(false);
   });
 
-  addMessage('Ask me about mountain climbing. I answer only from the site’s local field guide, FAQs and route data.', 'assistant');
+  addMessage('Welcome to the trailhead. Ask me about routes, altitude, gear or mountain stories—I’ll look through this site’s field guides and route notes for you.', 'assistant');
 })();
