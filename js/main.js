@@ -7,10 +7,41 @@ const load = async f => { const r = await fetch('data/' + f + '.json'); if (!r.o
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const fail = (el, m) => el && (el.innerHTML = `<p class="note" role="alert">${m || 'Could not load data. Run via a local server (e.g. VS Code Live Server), not file://.'}</p>`);
 const cur = (location.pathname.split('/').pop() || 'index.html').replace('.html', '');
-// Keep every destination available; phones use a menu button while tablets retain the swipeable link rail.
-$('#nav').innerHTML = `<header><div class="wrap"><div class="brand-group"><a class="logo" href="index.html" aria-label="Alpine Ascents home"><img src="assets/images/climbing/alpine-mark.svg" alt=""><span>Alpine</span>Ascents</a><div class="visit-counter" title="A count saved in this browser only"><small>LOCAL VISITS</small><strong id="visit-count">—</strong></div></div><nav id="primary-navigation" class="site-nav" aria-label="Main navigation"><ul>${PAGES.map(([p, t]) => `<li><a href="${p}.html"${p === cur ? ' aria-current="page"' : ''}>${t}</a></li>`).join('')}<li><a class="btn pri" href="booking.html">Plan a trip</a></li></ul></nav><button id="menu" class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-navigation"><span></span><span></span><span></span></button></div></header>`;
+// Keep every destination available; phones use a menu while tablets get an arrow-controlled swipeable link rail.
+$('#nav').innerHTML = `<header><div class="wrap"><div class="brand-group"><a class="logo" href="index.html" aria-label="Alpine Ascents home"><img src="assets/images/climbing/alpine-mark.svg" alt=""><span>Alpine</span>Ascents</a><div class="visit-counter" title="A count saved in this browser only"><small>LOCAL VISITS</small><strong id="visit-count">—</strong></div></div><nav id="primary-navigation" class="site-nav" aria-label="Main navigation"><button class="nav-scroll nav-scroll-prev" type="button" aria-label="Scroll navigation left" aria-controls="primary-navigation-links" disabled><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m15 18-6-6 6-6"></path></svg></button><ul id="primary-navigation-links">${PAGES.map(([p, t]) => `<li><a href="${p}.html"${p === cur ? ' aria-current="page"' : ''}>${t}</a></li>`).join('')}<li><a class="btn pri" href="booking.html">Plan a trip</a></li></ul><button class="nav-scroll nav-scroll-next" type="button" aria-label="Scroll navigation right" aria-controls="primary-navigation-links" disabled><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9 18 6-6-6-6"></path></svg></button></nav><button id="menu" class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-navigation"><span></span><span></span><span></span></button></div></header>`;
 const navButton = $('#menu');
 const siteNav = $('.site-nav');
+const navTrack = $('#primary-navigation-links');
+const navScrollButtons = $$('.nav-scroll', siteNav);
+const updateNavScrollButtons = () => {
+   const maxScroll = navTrack.scrollWidth - navTrack.clientWidth;
+   const hasOverflow = maxScroll > 1;
+   siteNav.classList.toggle('has-overflow', hasOverflow);
+   navScrollButtons.forEach(button => {
+      const direction = button.classList.contains('nav-scroll-prev') ? -1 : 1;
+      button.disabled = !hasOverflow || (direction < 0 ? navTrack.scrollLeft <= 1 : navTrack.scrollLeft >= maxScroll - 1);
+   });
+};
+navScrollButtons.forEach(button => {
+   button.addEventListener('click', () => {
+      const direction = button.classList.contains('nav-scroll-prev') ? -1 : 1;
+      const distance = direction * Math.max(180, navTrack.clientWidth * .65);
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) navTrack.scrollLeft += distance;
+      else navTrack.scrollBy({ left: distance, behavior: 'smooth' });
+   });
+});
+navTrack.addEventListener('scroll', updateNavScrollButtons, { passive: true });
+addEventListener('resize', updateNavScrollButtons);
+if (innerWidth > 860 && innerWidth <= 1100) {
+   const currentLink = $('[aria-current="page"]', navTrack);
+   if (currentLink) {
+      const trackRect = navTrack.getBoundingClientRect();
+      const linkRect = currentLink.getBoundingClientRect();
+      const centeredScroll = navTrack.scrollLeft + linkRect.left - trackRect.left - (navTrack.clientWidth - linkRect.width) / 2;
+      navTrack.scrollLeft = Math.max(0, Math.min(centeredScroll, navTrack.scrollWidth - navTrack.clientWidth));
+   }
+}
+updateNavScrollButtons();
 const setNavigationOpen = open => {
    navButton.setAttribute('aria-expanded', String(open));
    navButton.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
@@ -124,13 +155,114 @@ $('#ticker-location').onclick = () => {
 };
 // Animate only marked content entering the viewport; reduced-motion users get the CSS fallback.
 const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting && (e.target.classList.add('in'), io.unobserve(e.target))));
-const reveal = () => $$('.rv:not(.in)').forEach(e => io.observe(e)); reveal();
+const reveal = () => $$('.rv:not(.in)').forEach(e => io.observe(e));
+$$('main > section:not(.home-hero) > .wrap:not(.rv)').forEach(element => element.classList.add('rv'));
+reveal();
 // Keep photo sourcing metadata in the dataset without adding repetitive labels below every card.
 const ph = (n, m) => `<div class="ph"><img src="${esc(imgSrc(m))}" alt="${esc(m.alt || n)}" loading="lazy" decoding="async" onerror="this.remove()"></div>`;
 const card = e => `<article class="card rv">${ph(e.name, e.image)}<div class="body"><span class="tag">${esc(e.difficulty)}</span><h3>${esc(e.name)}</h3><dl><dt>Country</dt><dd>${esc(e.country)}</dd><dt>Altitude</dt><dd>${Number(e.altitude).toLocaleString()} m</dd><dt>Typical duration</dt><dd>~${Number(e.days)} days</dd><dt>Season</dt><dd>${esc(e.season)}</dd></dl><a class="btn" href="expedition-details.html?id=${encodeURIComponent(e.id)}">Route details</a></div></article>`;
 const P = document.body.dataset.page;
 if (P === 'home') heroMedia();
 else pagePhoto();
+if (P === 'home') {
+   const reviewForm = $('#review-form');
+   const reviewList = $('#reviews-list');
+   const reviewStatus = $('#review-status');
+   const reviewStorageKey = 'alpine-ascents-field-notes';
+   let reviews = [];
+
+   const renderReviews = () => {
+      reviewList.replaceChildren();
+      if (!reviews.length) {
+         const empty = document.createElement('p');
+         empty.className = 'reviews-empty';
+         empty.textContent = 'No field notes yet. Be the first to share a thoughtful review.';
+         reviewList.append(empty);
+         return;
+      }
+
+      reviews.slice().reverse().forEach(review => {
+         const article = document.createElement('article');
+         article.className = 'review-card rv';
+         const stars = document.createElement('span');
+         stars.className = 'review-stars';
+         stars.setAttribute('role', 'img');
+         stars.setAttribute('aria-label', `${review.rating} out of 5 stars`);
+         stars.innerHTML = Array.from({ length: 5 }, (_, index) => `
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+               <path d="m12 2.8 2.8 5.7 6.3.9-4.6 4.5 1.1 6.3-5.6-3-5.6 3 1.1-6.3L3 9.4l6.3-.9L12 2.8Z"
+                  ${index < review.rating ? 'fill="currentColor"' : 'fill="none" stroke="currentColor"'} />
+            </svg>`).join('');
+         const quote = document.createElement('blockquote');
+         quote.textContent = review.text;
+         const attribution = document.createElement('p');
+         attribution.className = 'review-attribution';
+         const author = document.createElement('strong');
+         author.textContent = review.name;
+         const date = document.createElement('time');
+         date.dateTime = review.date;
+         date.textContent = new Intl.DateTimeFormat(undefined, { dateStyle: 'medium' }).format(new Date(review.date));
+         attribution.append(author, date);
+         article.append(stars, quote, attribution);
+         reviewList.append(article);
+      });
+      reveal();
+   };
+
+   try {
+      const savedReviews = JSON.parse(localStorage.getItem(reviewStorageKey) || '[]');
+      if (!Array.isArray(savedReviews)) throw new TypeError('Saved review data must be a list.');
+      reviews = savedReviews.filter(review => review
+         && typeof review.name === 'string'
+         && typeof review.text === 'string'
+         && Number.isInteger(review.rating)
+         && review.rating >= 1
+         && review.rating <= 5
+         && !Number.isNaN(Date.parse(review.date)));
+   } catch (error) {
+      console.error('Could not read locally saved field-note reviews.', error);
+      reviewStatus.textContent = 'Saved field notes could not be loaded in this browser.';
+   }
+   renderReviews();
+
+   $$('.rating-options input', reviewForm).forEach(input => {
+      input.addEventListener('change', () => {
+         $$('.rating-options label', reviewForm).forEach(label => {
+            label.classList.toggle('is-active', Number(label.querySelector('input').value) <= Number(input.value));
+         });
+      });
+   });
+
+   reviewForm.addEventListener('submit', event => {
+      event.preventDefault();
+      if (!reviewForm.reportValidity()) return;
+
+      const formData = new FormData(reviewForm);
+      const review = {
+         name: String(formData.get('name')).trim(),
+         text: String(formData.get('review')).trim(),
+         rating: Number(formData.get('rating')),
+         date: new Date().toISOString()
+      };
+      if (!review.name || !review.text || !Number.isInteger(review.rating) || review.rating < 1 || review.rating > 5) {
+         reviewStatus.textContent = 'Add your name, a field note and a rating from 1 to 5 stars.';
+         return;
+      }
+
+      try {
+         reviews.push(review);
+         localStorage.setItem(reviewStorageKey, JSON.stringify(reviews));
+         renderReviews();
+         reviewForm.reset();
+         $$('.rating-options label', reviewForm).forEach(label => label.classList.remove('is-active'));
+         reviewStatus.textContent = 'Your field note has been saved in this browser.';
+      } catch (error) {
+         reviews.pop();
+         console.error('Could not save this field-note review in local storage.', error);
+         reviewStatus.textContent = 'Your field note could not be saved in this browser. Check available storage and try again.';
+      }
+   });
+}
 (async () => {
    const g = $('#grid');
    if (P === 'home') {
@@ -149,8 +281,9 @@ else pagePhoto();
          const topicCount = guideSections.filter(section => Array.isArray(guide[section])).length;
          $('#topic-count').textContent = String(topicCount).padStart(2, '0');
          $('#organization-count').textContent = String((guide.organizations || []).length).padStart(2, '0');
-         $('#home-notes-grid').innerHTML = (guide.stories || []).slice(0, 3).map(note => `<article class="home-note-card"><img src="${esc(imgSrc(note.image))}" alt="${esc(note.image.alt || note.title)}" loading="lazy" decoding="async"><div><span class="field-tag">${esc(note.category)}</span><h3>${esc(note.title)}</h3><p>${esc(note.text)}</p></div></article>`).join('');
+         $('#home-notes-grid').innerHTML = (guide.stories || []).slice(0, 3).map(note => `<article class="home-note-card rv"><img src="${esc(imgSrc(note.image))}" alt="${esc(note.image.alt || note.title)}" loading="lazy" decoding="async"><div><span class="field-tag">${esc(note.category)}</span><h3>${esc(note.title)}</h3><p>${esc(note.text)}</p></div></article>`).join('');
          if (!guide.stories || !guide.stories.length) $('#home-notes-grid').innerHTML = '<p class="note">No field notes are currently available.</p>';
+         reveal();
       } catch (error) {
          console.error('Could not load homepage field notes.', error);
          $('#topic-count').textContent = '—';
@@ -197,7 +330,7 @@ else pagePhoto();
          const renderGallery = () => {
             const visible = all.filter(item => !$('#cat').value || item.cat === $('#cat').value);
             g.innerHTML = visible.map((item, index) => `
-               <article class="card gallery-card">
+               <article class="card gallery-card rv">
                   ${ph(item.caption, item.image)}
                   <div class="body">
                      <h3>${esc(item.caption)}</h3>
@@ -209,6 +342,7 @@ else pagePhoto();
             $$('.gallery-trigger', g).forEach(button => {
                button.addEventListener('click', () => openPhoto(visible[Number(button.dataset.index)]));
             });
+            reveal();
          };
 
          $('#cat').addEventListener('change', renderGallery);
@@ -226,7 +360,7 @@ else pagePhoto();
          renderGallery();
       } catch { fail(g) }
    }
-   if (P === 'faq') { const f = $('#faq'); try { f.innerHTML = (await load('faqs')).map((x, i) => `<article class="faq-item"><button aria-expanded="false" aria-controls="a${i}"><img src="${esc(imgSrc(x.image))}" alt="" loading="lazy" decoding="async"><span class="faq-question">${esc(x.q)}</span><span class="faq-toggle" aria-hidden="true">+</span></button><div class="a" id="a${i}">${esc(x.a)}</div></article>`).join(''); $$('button', f).forEach(b => b.onclick = () => { const o = b.classList.toggle('open'); b.setAttribute('aria-expanded', o); $('.faq-toggle', b).textContent = o ? '−' : '+' }) } catch { fail(f) } }
+   if (P === 'faq') { const f = $('#faq'); try { f.innerHTML = (await load('faqs')).map((x, i) => `<article class="faq-item rv"><button aria-expanded="false" aria-controls="a${i}"><img src="${esc(imgSrc(x.image))}" alt="" loading="lazy" decoding="async"><span class="faq-question">${esc(x.q)}</span><span class="faq-toggle" aria-hidden="true">+</span></button><div class="a" id="a${i}">${esc(x.a)}</div></article>`).join(''); $$('button', f).forEach(b => b.onclick = () => { const o = b.classList.toggle('open'); b.setAttribute('aria-expanded', o); $('.faq-toggle', b).textContent = o ? '−' : '+' }); reveal() } catch { fail(f) } }
    if (P === 'about' || P === 'safety') {
       try {
          const guide = await load('mountaineering');
@@ -234,7 +368,8 @@ else pagePhoto();
             ? [...guide.history, ...guide.styles, ...guide.guidelines]
             : [...guide.hazards, ...guide.guidelines, ...guide.techniques];
          const grid = P === 'about' ? $('#about-grid') : $('#safety-grid');
-         grid.innerHTML = entries.map(item => `<article class="card">${ph(item.title, item.image)}<div class="body"><span class="tag">${esc(item.category)}</span><h3>${esc(item.title)}</h3><p>${esc(item.text)}</p></div></article>`).join('');
+         grid.innerHTML = entries.map(item => `<article class="card rv">${ph(item.title, item.image)}<div class="body"><span class="tag">${esc(item.category)}</span><h3>${esc(item.title)}</h3><p>${esc(item.text)}</p></div></article>`).join('');
+         reveal();
       } catch (error) {
          console.error(`Could not load ${P} page guide cards.`, error);
          fail(P === 'about' ? $('#about-grid') : $('#safety-grid'), 'Could not load the guide cards. Run the website through a local server.');
@@ -249,11 +384,12 @@ else pagePhoto();
             ['stories', 'stories-grid'], ['organizations', 'organizations-grid'],
             ['developments', 'developments-grid'], ['guidelines', 'guidelines-grid']
          ];
-         const renderInfoCard = item => `<article class="field-card">${item.image ? `<img src="${esc(imgSrc(item.image))}" alt="${esc(item.image.alt || item.title)}" loading="lazy" decoding="async">` : ''}<div class="field-card-body"><span class="field-tag">${esc(item.category)}</span><h3>${esc(item.title)}</h3><p>${esc(item.text)}</p>${item.region ? `<p class="field-region">${esc(item.region)}</p>` : ''}</div></article>`;
+         const renderInfoCard = item => `<article class="field-card rv">${item.image ? `<img src="${esc(imgSrc(item.image))}" alt="${esc(item.image.alt || item.title)}" loading="lazy" decoding="async">` : ''}<div class="field-card-body"><span class="field-tag">${esc(item.category)}</span><h3>${esc(item.title)}</h3><p>${esc(item.text)}</p>${item.region ? `<p class="field-region">${esc(item.region)}</p>` : ''}</div></article>`;
          sections.forEach(([key, target]) => {
             const container = $('#' + target);
             container.innerHTML = (guide[key] || []).map(renderInfoCard).join('') || '<p>No entries are available.</p>';
          });
+         reveal();
 
          const status = $('#nearby-status'), results = $('#nearby-results'), map = $('#nearby-map');
          $('#nearby-search').onclick = () => {

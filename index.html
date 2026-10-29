@@ -179,6 +179,98 @@
             </div>
         </section>
 
+        <section class="home-reviews" id="reviews" aria-labelledby="reviews-title">
+            <div class="wrap reviews-layout">
+                <div class="reviews-intro">
+                    <p class="eyebrow"><span></span> Notes from fellow explorers</p>
+                    <h2 id="reviews-title">Your voice belongs<br><em>in the field notes.</em></h2>
+                    <p>Share what helped you plan, what you learned, or a small piece of mountain wisdom for the next person setting out.</p>
+                    <p class="reviews-privacy">Reviews are saved in this browser only; they are not published or sent anywhere.</p>
+                    <section class="sample-reviews" aria-labelledby="sample-reviews-title">
+                        <div class="sample-reviews-heading">
+                            <h3 id="sample-reviews-title">Sample field notes</h3>
+                            <span>Fictional examples</span>
+                        </div>
+                        <p class="sample-reviews-notice">These invented profiles and comments are design examples, not real visitors or customer testimonials.</p>
+                        <div class="sample-reviews-grid">
+                            <article class="review-card sample-review">
+                                <div class="sample-review-profile">
+                                    <span class="sample-avatar avatar-amber" aria-hidden="true">MK</span>
+                                    <span><strong>Mira K.</strong><small>Fictional profile · New trekker</small></span>
+                                </div>
+                                <p class="sample-review-label">Illustrative example</p>
+                                <blockquote>“The season and altitude notes make it easier to compare routes before I start planning.”</blockquote>
+                            </article>
+                            <article class="review-card sample-review">
+                                <div class="sample-review-profile">
+                                    <span class="sample-avatar avatar-pine" aria-hidden="true">SA</span>
+                                    <span><strong>Samir A.</strong><small>Fictional profile · Weekend hiker</small></span>
+                                </div>
+                                <p class="sample-review-label">Illustrative example</p>
+                                <blockquote>“I like the reminder to build experience gradually and turn back when conditions change.”</blockquote>
+                            </article>
+                            <article class="review-card sample-review">
+                                <div class="sample-review-profile">
+                                    <span class="sample-avatar avatar-slate" aria-hidden="true">LS</span>
+                                    <span><strong>Leena S.</strong><small>Fictional profile · Map enthusiast</small></span>
+                                </div>
+                                <p class="sample-review-label">Illustrative example</p>
+                                <blockquote>“The field guide gives me a useful place to begin learning the language of the mountains.”</blockquote>
+                            </article>
+                            <article class="review-card sample-review">
+                                <div class="sample-review-profile">
+                                    <span class="sample-avatar avatar-rust" aria-hidden="true">JT</span>
+                                    <span><strong>Jordan T.</strong><small>Fictional profile · Trail runner</small></span>
+                                </div>
+                                <p class="sample-review-label">Illustrative example</p>
+                                <blockquote>“The planning checklist is a good nudge to think about the descent, not just the summit.”</blockquote>
+                            </article>
+                            <article class="review-card sample-review">
+                                <div class="sample-review-profile">
+                                    <span class="sample-avatar avatar-sky" aria-hidden="true">AN</span>
+                                    <span><strong>Amara N.</strong><small>Fictional profile · New climber</small></span>
+                                </div>
+                                <p class="sample-review-label">Illustrative example</p>
+                                <blockquote>“Clear explanations helped me learn the difference between trekking and technical climbing.”</blockquote>
+                            </article>
+                            <article class="review-card sample-review">
+                                <div class="sample-review-profile">
+                                    <span class="sample-avatar avatar-moss" aria-hidden="true">RD</span>
+                                    <span><strong>Rafi D.</strong><small>Fictional profile · Nature photographer</small></span>
+                                </div>
+                                <p class="sample-review-label">Illustrative example</p>
+                                <blockquote>“A thoughtful guide that makes room for curiosity while keeping safety in view.”</blockquote>
+                            </article>
+                        </div>
+                    </section>
+                    <h3 class="visitor-notes-title">Notes saved in this browser</h3>
+                    <div class="reviews-list" id="reviews-list" aria-live="polite">
+                        <p class="reviews-empty">No field notes yet. Be the first to share a thoughtful review.</p>
+                    </div>
+                </div>
+                <form class="review-form" id="review-form">
+                    <p class="review-form-kicker">Leave a field note</p>
+                    <h3>How was your visit?</h3>
+                    <fieldset class="review-rating">
+                        <legend>Your rating</legend>
+                        <div class="rating-options">
+                            <label><input type="radio" name="rating" value="1" required><span aria-hidden="true"></span><span class="rating-label">1 star</span></label>
+                            <label><input type="radio" name="rating" value="2"><span aria-hidden="true"></span><span class="rating-label">2 stars</span></label>
+                            <label><input type="radio" name="rating" value="3"><span aria-hidden="true"></span><span class="rating-label">3 stars</span></label>
+                            <label><input type="radio" name="rating" value="4"><span aria-hidden="true"></span><span class="rating-label">4 stars</span></label>
+                            <label><input type="radio" name="rating" value="5"><span aria-hidden="true"></span><span class="rating-label">5 stars</span></label>
+                        </div>
+                    </fieldset>
+                    <label for="review-name">Your name</label>
+                    <input id="review-name" name="name" type="text" maxlength="60" autocomplete="name" placeholder="How should we credit you?" required>
+                    <label for="review-text">Your field note</label>
+                    <textarea id="review-text" name="review" rows="4" maxlength="500" placeholder="Share a helpful thought for another mountain-minded visitor…" required></textarea>
+                    <button class="btn pri" type="submit">Add your note <span class="icon-external" aria-hidden="true"></span></button>
+                    <p class="review-status" id="review-status" role="status" aria-live="polite"></p>
+                </form>
+            </div>
+        </section>
+
         <!-- These links provide clear next steps without suggesting that this site runs trips. -->
         <section class="home-closer">
             <div class="wrap closer-inner">
