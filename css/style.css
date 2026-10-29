@@ -4901,3 +4901,407 @@ body[data-page="home"] .home-note-card:focus-within > img {
         stroke-width: 2.5;
     }
 }
+
+header .site-nav.has-overflow > .nav-scroll {
+    width: 44px;
+    height: 40px;
+    min-height: 40px;
+    border: 0;
+    border-radius: 14px;
+    background: linear-gradient(145deg, #405943, #293b30);
+    color: #fffdf7;
+    box-shadow: 0 5px 14px #20282138, inset 0 1px #ffffff30;
+    transition: transform .2s ease, box-shadow .2s ease, background .2s ease, opacity .2s ease;
+}
+
+header .site-nav.has-overflow > .nav-scroll-prev {
+    left: .25rem;
+}
+
+header .site-nav.has-overflow > .nav-scroll-next {
+    right: .25rem;
+}
+
+header .site-nav.has-overflow > .nav-scroll:not(:disabled):hover {
+    border-color: transparent;
+    background: linear-gradient(145deg, #9d7048, #765333);
+    box-shadow: 0 8px 18px #20282142, inset 0 1px #ffffff38;
+    transform: translateY(-50%) scale(1.06);
+}
+
+header .site-nav.has-overflow > .nav-scroll:disabled {
+    border-color: transparent;
+    background: #e2e4dc;
+    color: #7d867b;
+    opacity: 1;
+    box-shadow: inset 0 0 0 1px #d1d6cb;
+}
+
+header .site-nav > .nav-scroll svg {
+    width: 22px;
+    height: 22px;
+    stroke-width: 2.8;
+}
+
+input:not([type="radio"]):not([type="checkbox"]):not([type="range"]),
+select,
+textarea {
+    min-width: 0;
+    min-height: 50px;
+    padding: .8rem 1rem;
+    border: 1px solid #d5d9cd;
+    border-radius: 14px;
+    background-color: #fffefa;
+    color: #29362d;
+    font: 500 .9rem/1.45 system-ui, 'Segoe UI', sans-serif;
+    box-shadow: 0 3px 10px #29362d08, inset 0 1px #ffffffb3;
+    transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease, transform .2s ease;
+}
+
+input:not([type="radio"]):not([type="checkbox"]):not([type="range"])::placeholder,
+textarea::placeholder {
+    color: #85897f;
+    opacity: 1;
+}
+
+input:not([type="radio"]):not([type="checkbox"]):not([type="range"]):hover,
+select:hover,
+textarea:hover {
+    border-color: #aab5a4;
+    background-color: #ffffff;
+}
+
+input:not([type="radio"]):not([type="checkbox"]):not([type="range"]):focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    border-color: #58744b;
+    outline: none;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 4px #58744b20, 0 7px 20px #29362d10;
+}
+
+select {
+    padding-right: 2.7rem;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m6 9 6 6 6-6' fill='none' stroke='%2358744b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-position: right 1rem center;
+    background-repeat: no-repeat;
+    background-size: 16px;
+    cursor: pointer;
+}
+
+textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+input:disabled,
+select:disabled,
+textarea:disabled {
+    cursor: not-allowed;
+    opacity: .62;
+}
+
+input[type="search"] {
+    padding-left: 2.75rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='10.8' cy='10.8' r='6.3' fill='none' stroke='%23756b5e' stroke-width='1.8'/%3E%3Cpath d='m15.5 15.5 4.2 4.2' fill='none' stroke='%23756b5e' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-position: 1rem center;
+    background-repeat: no-repeat;
+    background-size: 17px;
+}
+
+input[type="search"]:not([type="radio"]):not([type="checkbox"]):not([type="range"]) {
+    padding-left: 2.75rem;
+}
+
+.visit-counter img {
+    display: block;
+    width: auto;
+    max-width: 100px;
+    height: 24px;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px #29362d12;
+}
+
+.visit-counter-unavailable {
+    color: #8a463f;
+    font: 650 .62rem/1.3 system-ui, 'Segoe UI', sans-serif;
+}
+
+.tools {
+    gap: .7rem;
+    padding: 1rem;
+    border: 1px solid #e0dfd5;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #fffdf9, #eeeee7);
+    box-shadow: 0 12px 32px #29362d0d;
+}
+
+.tools input,
+.tools select {
+    flex: 1 1 180px;
+    min-height: 50px;
+    border-color: #e0e2d9;
+    box-shadow: 0 4px 12px #29362d0a;
+}
+
+form[data-form] {
+    gap: 1rem;
+    max-width: 640px;
+    margin: 1.4rem 0 2.5rem;
+    padding: clamp(1.1rem, 3vw, 1.8rem);
+    border: 1px solid #e0dfd5;
+    border-radius: 22px;
+    background: linear-gradient(145deg, #fffdf9, #f3f2eb);
+    box-shadow: 0 18px 48px #29362d12;
+}
+
+form[data-form] > div {
+    display: grid;
+    gap: .4rem;
+}
+
+form[data-form] label {
+    color: #405143;
+    font: 700 .76rem/1.4 system-ui, 'Segoe UI', sans-serif;
+}
+
+form[data-form] .err {
+    min-height: .4rem;
+    font-size: .72rem;
+}
+
+form[data-form] .btn {
+    justify-self: start;
+    min-height: 48px;
+    padding-inline: 1.25rem;
+    border-radius: 999px;
+}
+
+body[data-page="home"] .reviews-layout {
+    align-items: start;
+}
+
+body[data-page="home"] .reviews-intro {
+    min-width: 0;
+}
+
+body[data-page="home"] .sample-reviews {
+    margin-top: 1.8rem;
+    padding: clamp(.9rem, 2.5vw, 1.35rem);
+    border: 1px solid #d6d8cb;
+    border-radius: 24px;
+    background:
+        radial-gradient(ellipse at 100% 0, #dce5d733 0, transparent 44%),
+        linear-gradient(145deg, #f2f1e9, #e4e6dc);
+    box-shadow: inset 0 1px #ffffffb3, 0 14px 34px #29362d0d;
+}
+
+body[data-page="home"] .sample-reviews-heading {
+    margin-bottom: .55rem;
+}
+
+body[data-page="home"] .sample-reviews-heading h3 {
+    font-size: .98rem;
+    letter-spacing: -.025em;
+}
+
+body[data-page="home"] .sample-reviews-heading > span {
+    padding: .35rem .7rem;
+    border-color: #caa77e;
+    background: #f7e9d8;
+    color: #68472e;
+    font-size: .58rem;
+}
+
+body[data-page="home"] .sample-reviews-notice {
+    max-width: 58ch;
+    margin-bottom: 1rem;
+    font-size: .76rem;
+}
+
+body[data-page="home"] .sample-reviews-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .85rem;
+}
+
+body[data-page="home"] .sample-review {
+    position: relative;
+    overflow: hidden;
+    padding: 1rem;
+    border-color: #d7d9cd;
+    border-radius: 18px;
+    background: #fffefa;
+    box-shadow: 0 7px 18px #29362d10;
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+
+body[data-page="home"] .sample-review::before {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 3px;
+    background: linear-gradient(#b88455, #58744b);
+    content: "";
+}
+
+body[data-page="home"] .sample-review:hover {
+    border-color: #b99572;
+    box-shadow: 0 14px 28px #29362d1b;
+    transform: translateY(-3px);
+}
+
+body[data-page="home"] .sample-review blockquote {
+    margin-top: .55rem;
+    color: #354139;
+    font-size: .9rem;
+    line-height: 1.55;
+}
+
+body[data-page="home"] .visitor-notes-title {
+    margin: 1.55rem 0 -.65rem;
+    font-size: .94rem;
+}
+
+body[data-page="home"] .reviews-list {
+    margin-top: 1rem;
+}
+
+body[data-page="home"] .reviews-list .review-card {
+    border-color: #d2d7ca;
+    border-radius: 20px;
+    background: linear-gradient(145deg, #fffefa, #f1f2eb);
+    box-shadow: 0 10px 24px #29362d10;
+}
+
+body[data-page="home"] .review-form {
+    position: sticky;
+    top: 1.25rem;
+    border-color: #dddccd;
+    background:
+        radial-gradient(ellipse at 100% 0, #e3e8d755 0, transparent 42%),
+        #fbfaf6;
+    box-shadow: 0 22px 54px #29362d17;
+}
+
+body[data-page="home"] .review-form > input[type="text"],
+body[data-page="home"] .review-form textarea {
+    min-height: 50px;
+    border-radius: 14px;
+    background-color: #fffefa;
+}
+
+body[data-page="home"] .review-form textarea {
+    min-height: 135px;
+}
+
+body[data-page="home"] .review-form .btn {
+    min-height: 50px;
+    padding-inline: 1.3rem;
+}
+
+.icon-external,
+.icon-down {
+    flex-basis: max(1.3em, 16px);
+    width: max(1.3em, 16px);
+    min-width: max(1.3em, 16px);
+    height: max(1.3em, 16px);
+    margin-inline-start: .45em;
+    vertical-align: -.2em;
+    transition: transform .2s ease;
+}
+
+.icon-external::before,
+.icon-down::before {
+    background-color: currentColor;
+    mask-position: center;
+    mask-repeat: no-repeat;
+    mask-size: contain;
+}
+
+.icon-external::before {
+    top: 0;
+    right: auto;
+    bottom: auto;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 12h15m0 0-7-7m7 7-7 7' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+.icon-external::after,
+.icon-down::after {
+    display: none;
+}
+
+.icon-down::before {
+    top: 0;
+    right: auto;
+    bottom: auto;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 4v15m0 0 7-7m-7 7-7-7' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+.hero-actions a:hover .icon-external,
+.hero-actions a:hover .icon-down,
+.text-link:hover .icon-external {
+    transform: translateX(3px);
+}
+
+.hero-actions a:hover .icon-down {
+    transform: translateY(3px);
+}
+
+@media(max-width:760px) {
+    body[data-page="home"] .review-form {
+        position: static;
+    }
+
+    .tools {
+        padding: .75rem;
+        border-radius: 17px;
+    }
+
+    .tools input,
+    .tools select {
+        flex-basis: 100%;
+        width: 100%;
+    }
+}
+
+@media(max-width:520px) {
+    body[data-page="home"] .sample-reviews-grid {
+        grid-template-columns: 1fr;
+    }
+
+    body[data-page="home"] .sample-review {
+        padding: .95rem;
+    }
+
+    .icon-external,
+    .icon-down {
+        flex-basis: max(1.3em, 16px);
+        width: max(1.3em, 16px);
+        min-width: max(1.3em, 16px);
+        height: max(1.3em, 16px);
+    }
+
+    form[data-form] {
+        border-radius: 18px;
+    }
+}
+
+@media(prefers-reduced-motion:reduce) {
+    input,
+    select,
+    textarea,
+    .icon-external,
+    .icon-down,
+    header .site-nav > .nav-scroll,
+    body[data-page="home"] .sample-review {
+        transition: none;
+    }
+}

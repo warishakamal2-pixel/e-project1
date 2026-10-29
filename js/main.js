@@ -8,9 +8,22 @@ const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '
 const fail = (el, m) => el && (el.innerHTML = `<p class="note" role="alert">${m || 'Could not load data. Run via a local server (e.g. VS Code Live Server), not file://.'}</p>`);
 const cur = (location.pathname.split('/').pop() || 'index.html').replace('.html', '');
 // Keep every destination available; phones use a menu while tablets get an arrow-controlled swipeable link rail.
-$('#nav').innerHTML = `<header><div class="wrap"><div class="brand-group"><a class="logo" href="index.html" aria-label="Alpine Ascents home"><img src="assets/images/climbing/alpine-mark.svg" alt=""><span>Alpine</span>Ascents</a><div class="visit-counter" title="A count saved in this browser only"><small>LOCAL VISITS</small><strong id="visit-count">—</strong></div></div><nav id="primary-navigation" class="site-nav" aria-label="Main navigation"><button class="nav-scroll nav-scroll-prev" type="button" aria-label="Scroll navigation left" aria-controls="primary-navigation-links" disabled><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m15 18-6-6 6-6"></path></svg></button><ul id="primary-navigation-links">${PAGES.map(([p, t]) => `<li><a href="${p}.html"${p === cur ? ' aria-current="page"' : ''}>${t}</a></li>`).join('')}<li><a class="btn pri" href="booking.html">Plan a trip</a></li></ul><button class="nav-scroll nav-scroll-next" type="button" aria-label="Scroll navigation right" aria-controls="primary-navigation-links" disabled><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9 18 6-6-6-6"></path></svg></button></nav><button id="menu" class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-navigation"><span></span><span></span><span></span></button></div></header>`;
+$('#nav').innerHTML = `<header><div class="wrap"><div class="brand-group"><a class="logo" href="index.html" aria-label="Alpine Ascents home"><img src="assets/images/climbing/alpine-mark.svg" alt=""><span>Alpine</span>Ascents</a><div class="visit-counter" title="Site-wide page views, counted by a hosted service"><small>SITE<br>VISITS</small><img id="visit-count" src="https://visitor-badge.laobi.icu/badge?page_id=warishakamal2-pixel.e-project1&amp;left_text=views&amp;left_color=%233e503f&amp;right_color=%23a56c41&amp;radius=8&amp;height=24" alt="Site-wide visit count" width="82" height="24" loading="eager" decoding="async"></div></div><nav id="primary-navigation" class="site-nav" aria-label="Main navigation"><button class="nav-scroll nav-scroll-prev" type="button" aria-label="Scroll navigation left" aria-controls="primary-navigation-links" disabled><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m15 18-6-6 6-6"></path></svg></button><ul id="primary-navigation-links">${PAGES.map(([p, t]) => `<li><a href="${p}.html"${p === cur ? ' aria-current="page"' : ''}>${t}</a></li>`).join('')}<li><a class="btn pri" href="booking.html">Plan a trip</a></li></ul><button class="nav-scroll nav-scroll-next" type="button" aria-label="Scroll navigation right" aria-controls="primary-navigation-links" disabled><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9 18 6-6-6-6"></path></svg></button></nav><button id="menu" class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-navigation"><span></span><span></span><span></span></button></div></header>`;
 const navButton = $('#menu');
 const siteNav = $('.site-nav');
+const visitBadge = $('#visit-count');
+visitBadge.addEventListener('error', () => {
+   const unavailable = document.createElement('span');
+   unavailable.className = 'visit-counter-unavailable';
+   unavailable.setAttribute('role', 'status');
+   unavailable.textContent = 'Unavailable';
+   visitBadge.replaceWith(unavailable);
+});
+try {
+   localStorage.removeItem('aa-local-visits');
+} catch (error) {
+   console.warn('Could not remove the retired browser-only visit counter.', error);
+}
 const navTrack = $('#primary-navigation-links');
 const navScrollButtons = $$('.nav-scroll', siteNav);
 const updateNavScrollButtons = () => {
@@ -57,15 +70,6 @@ document.addEventListener('keydown', event => {
 addEventListener('resize', () => {
    if (innerWidth > 860) setNavigationOpen(false);
 });
-// This privacy-friendly counter is stored in this browser only, not reported as total site traffic.
-try {
-   const visits = Number(localStorage.getItem('aa-local-visits') || 0);
-   const nextVisit = Number.isSafeInteger(visits) && visits >= 0 ? visits + 1 : 1;
-   localStorage.setItem('aa-local-visits', String(nextVisit));
-   $('#visit-count').textContent = nextVisit.toLocaleString();
-} catch (error) {
-   console.warn('Local visit count is unavailable in this browser.', error);
-}
 // Group key destinations in the footer and keep the site-wide safety disclaimer visible.
 $('#foot').innerHTML = `
    <footer class="site-footer">
