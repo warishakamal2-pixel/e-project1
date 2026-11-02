@@ -531,20 +531,129 @@ if (P === 'home') {
          sel.value = new URLSearchParams(location.search).get('id') || '';
          const packageCards = $$('.package-card[data-package]');
          const packageStatus = $('#package-status');
-         const syncPackageCards = () => packageCards.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.package === sel.value)));
-         const updatePackageStatus = () => {
-            const selectedPackage = packageCards.find(button => button.dataset.package === sel.value);
-            if (packageStatus) packageStatus.textContent = selectedPackage
-               ? `${$('h3', selectedPackage).textContent} added to your enquiry outline.`
-               : 'Select a route outline to add it to your enquiry.';
-            syncPackageCards();
+         const cart = new Map();
+         const cartPanel = $('#package-cart');
+         const cartItems = $('#package-cart-items');
+         const cartCount = $('#cart-count');
+         const cartTotal = $('#cart-total');
+         const formatCurrency = amount => new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD',
+            maximumFractionDigits: 0
+         }).format(amount);
+         const updatePackageStatus = message => {
+            if (packageStatus && message) packageStatus.textContent = message;
+            packageCards.forEach(button => {
+               const inCart = cart.has(button.dataset.package);
+               const name = $('h3', button).textContent;
+               const quantity = cart.get(button.dataset.package)?.quantity || 0;
+               button.setAttribute('aria-pressed', String(inCart));
+               button.setAttribute('aria-label', `${name}. ${inCart ? `In cart: ${quantity} climber${quantity === 1 ? '' : 's'}. ` : ''}Add one climber to cart.`);
+               $('.package-action', button).firstChild.nodeValue = inCart ? `In cart · ${quantity} — add another ` : 'Add to cart ';
+            });
+         };
+         const createCartButton = (label, className, onClick) => {
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.className = className;
+            button.textContent = label;
+            button.addEventListener('click', onClick);
+            return button;
+         };
+         const renderCart = () => {
+            const entries = [...cart.values()];
+            cartPanel.hidden = entries.length === 0;
+            cartItems.replaceChildren();
+            let totalMin = 0;
+            let totalMax = 0;
+            let hasOpenEndedEstimate = false;
+            let totalClimbers = 0;
+
+            entries.forEach(item => {
+               const { button, quantity, minPrice, maxPrice, openEnded } = item;
+               const name = $('h3', button).textContent;
+               totalMin += minPrice * quantity;
+               totalMax += maxPrice * quantity;
+               totalClimbers += quantity;
+               if (openEnded) hasOpenEndedEstimate = true;
+
+               const row = document.createElement('li');
+               row.className = 'package-cart-item';
+               const details = document.createElement('div');
+               details.className = 'cart-item-details';
+               const title = document.createElement('strong');
+               title.textContent = name;
+               const price = document.createElement('small');
+               price.textContent = `${quantity} climber${quantity === 1 ? '' : 's'} · ${formatCurrency(minPrice)}–${formatCurrency(maxPrice)}${openEnded ? '+' : ''} per climber`;
+               details.append(title, price);
+
+               const controls = document.createElement('div');
+               controls.className = 'cart-item-controls';
+               controls.setAttribute('aria-label', `${name} quantity controls`);
+               const decrement = createCartButton('−', 'cart-quantity-button', () => {
+                  if (item.quantity <= 1) cart.delete(button.dataset.package);
+                  else item.quantity -= 1;
+                  renderCart();
+               });
+               decrement.setAttribute('aria-label', `Remove one ${name} climber`);
+               const quantityLabel = document.createElement('span');
+               quantityLabel.className = 'cart-quantity';
+               quantityLabel.textContent = String(quantity);
+               const increment = createCartButton('+', 'cart-quantity-button', () => {
+                  item.quantity += 1;
+                  renderCart();
+               });
+               increment.setAttribute('aria-label', `Add one ${name} climber`);
+               const remove = createCartButton('Remove', 'cart-remove-button', () => {
+                  cart.delete(button.dataset.package);
+                  renderCart();
+               });
+               remove.setAttribute('aria-label', `Remove ${name} from cart`);
+               controls.append(decrement, quantityLabel, increment, remove);
+               row.append(details, controls);
+               cartItems.append(row);
+            });
+
+            cartCount.textContent = String(totalClimbers);
+            cartTotal.textContent = entries.length
+               ? `${formatCurrency(totalMin)}–${formatCurrency(totalMax)}${hasOpenEndedEstimate ? '+' : ''}`
+               : `${formatCurrency(0)}–${formatCurrency(0)}`;
+            updatePackageStatus(entries.length
+               ? `Cart updated: ${totalClimbers} climber${totalClimbers === 1 ? '' : 's'} across ${entries.length} route${entries.length === 1 ? '' : 's'}.`
+               : sel.value
+                  ? `Selected: ${$('h3', packageCards.find(button => button.dataset.package === sel.value)).textContent}. Add it from its card to the cart.`
+                  : 'No routes in your cart yet.');
          };
          packageCards.forEach(button => button.addEventListener('click', () => {
             sel.value = button.dataset.package;
-            updatePackageStatus();
+            const id = button.dataset.package;
+            const item = cart.get(id);
+            if (item) item.quantity += 1;
+            else {
+               const minPrice = Number(button.dataset.minPrice);
+               const maxPrice = Number(button.dataset.maxPrice);
+               if (!Number.isFinite(minPrice) || !Number.isFinite(maxPrice) || minPrice < 0 || maxPrice < minPrice) {
+                  console.error('Package has an invalid estimated price range.', button);
+                  if (packageStatus) packageStatus.textContent = 'This route has an invalid estimate and could not be added.';
+                  return;
+               }
+               cart.set(id, {
+                  button,
+                  quantity: 1,
+                  minPrice,
+                  maxPrice,
+                  openEnded: button.dataset.openEnded === 'true'
+               });
+            }
+            renderCart();
          }));
-         sel.addEventListener('change', updatePackageStatus);
-         updatePackageStatus();
+         sel.addEventListener('change', () => {
+            const selectedPackage = packageCards.find(button => button.dataset.package === sel.value);
+            if (selectedPackage && !cart.has(sel.value)) {
+               updatePackageStatus(`Selected: ${$('h3', selectedPackage).textContent}. Add it from its card to the cart.`);
+            }
+         });
+         renderCart();
       } catch {
          sel.innerHTML = '<option value="">Unavailable</option>';
          $$('.package-card').forEach(button => button.disabled = true);
