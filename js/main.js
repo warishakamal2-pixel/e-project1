@@ -7,6 +7,64 @@ const load = async f => { const r = await fetch('data/' + f + '.json'); if (!r.o
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const fail = (el, m) => el && (el.innerHTML = `<p class="note" role="alert">${m || 'Could not load data. Run via a local server (e.g. VS Code Live Server), not file://.'}</p>`);
 const cur = (location.pathname.split('/').pop() || 'index.html').replace('.html', '');
+const PHOTO_POOL = [
+   'assets/images/climbing/unsplash-alpine-valley.jpg',
+   'assets/images/climbing/unsplash-mountain-sunset.jpg',
+   'assets/images/climbing/unsplash-starry-summit.jpg',
+   'assets/images/climbing/unsplash-alpine-lake.jpg',
+   'assets/images/climbing/unsplash-himalayan-peaks.jpg',
+   'assets/images/climbing/unsplash-snowy-range.jpg',
+   'assets/images/climbing/destination-denali.jpg',
+   'assets/images/climbing/destination-everest.jpg',
+   'assets/images/climbing/destination-k2.jpg',
+   'assets/images/climbing/destination-kilimanjaro.jpg',
+   'assets/images/climbing/destination-mont-blanc.jpg',
+   'assets/images/climbing/expedition-aconcagua.jpg',
+   'assets/images/climbing/expedition-denali.jpg',
+   'assets/images/climbing/expedition-everest.jpg',
+   'assets/images/climbing/expedition-k2.jpg',
+   'assets/images/climbing/expedition-kilimanjaro.jpg',
+   'assets/images/climbing/expedition-mont-blanc.jpg',
+   'assets/images/climbing/gallery-climber-harness.jpg',
+   'assets/images/climbing/gallery-climber-ridge.jpg',
+   'assets/images/climbing/gallery-climber-rock-outdoors.jpg',
+   'assets/images/climbing/gallery-climber-rock.jpg',
+   'assets/images/climbing/gallery-climber-sunrise.jpg',
+   'assets/images/climbing/gallery-solo-ascent.jpg',
+   'assets/images/climbing/guide-alpine-climber.jpg',
+   'assets/images/climbing/guide-climber-rope.jpg',
+   'assets/images/climbing/guide-climber-wall.jpg',
+   'assets/images/climbing/page-about.jpg',
+   'assets/images/climbing/page-booking.jpg',
+   'assets/images/climbing/page-contact.jpg',
+   'assets/images/climbing/page-faq.jpg',
+   'assets/images/climbing/page-safety.jpg'
+];
+const ensureDistinctPagePhotos = () => {
+   const images = $$('main img').filter(image => image.getAttribute('src'));
+   const used = new Set();
+   const pageOffset = [...(document.body.dataset.page || '')]
+      .reduce((total, character) => total + character.charCodeAt(0), 0) % PHOTO_POOL.length;
+
+   images.forEach(image => {
+      let path = new URL(image.src, location.href).pathname.toLowerCase();
+      if (used.has(path)) {
+         let replaced = false;
+         for (let offset = 0; offset < PHOTO_POOL.length; offset++) {
+            const candidate = PHOTO_POOL[(pageOffset + offset) % PHOTO_POOL.length];
+            const candidatePath = new URL(candidate, location.href).pathname.toLowerCase();
+            if (used.has(candidatePath)) continue;
+            image.src = candidate;
+            image.alt = 'Illustrative mountain landscape photograph.';
+            path = candidatePath;
+            replaced = true;
+            break;
+         }
+         if (!replaced) console.error('No unique local mountain photo is available for this page image.', image);
+      }
+      used.add(path);
+   });
+};
 // Keep every destination available; phones use a menu while tablets get an arrow-controlled swipeable link rail.
 $('#nav').innerHTML = `<header><div class="wrap"><div class="brand-group"><a class="logo" href="index.html" aria-label="Alpine Ascents home"><img src="assets/images/climbing/alpine-mark.svg" alt=""><span>Alpine</span>Ascents</a><div class="visit-counter" title="Site-wide page views, counted by a hosted service"><small>SITE<br>VISITS</small><img id="visit-count" src="https://visitor-badge.laobi.icu/badge?page_id=warishakamal2-pixel.e-project1&amp;left_text=views&amp;left_color=%233e503f&amp;right_color=%23a56c41&amp;radius=8&amp;height=24" alt="Site-wide visit count" width="82" height="24" loading="eager" decoding="async"></div></div><nav id="primary-navigation" class="site-nav" aria-label="Main navigation"><button class="nav-scroll nav-scroll-prev" type="button" aria-label="Scroll navigation left" aria-controls="primary-navigation-links" disabled><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m15 18-6-6 6-6"></path></svg></button><ul id="primary-navigation-links">${PAGES.map(([p, t]) => `<li><a href="${p}.html"${p === cur ? ' aria-current="page"' : ''}>${t}</a></li>`).join('')}<li><a class="btn pri" href="booking.html">Plan a trip</a></li></ul><button class="nav-scroll nav-scroll-next" type="button" aria-label="Scroll navigation right" aria-controls="primary-navigation-links" disabled><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9 18 6-6-6-6"></path></svg></button></nav><button id="menu" class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-navigation"><span></span><span></span><span></span></button></div></header>`;
 const navButton = $('#menu');
@@ -159,7 +217,10 @@ $('#ticker-location').onclick = () => {
 };
 // Animate only marked content entering the viewport; reduced-motion users get the CSS fallback.
 const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting && (e.target.classList.add('in'), io.unobserve(e.target))));
-const reveal = () => $$('.rv:not(.in)').forEach(e => io.observe(e));
+const reveal = () => {
+   ensureDistinctPagePhotos();
+   $$('.rv:not(.in)').forEach(e => io.observe(e));
+};
 $$('main > section:not(.home-hero) > .wrap:not(.rv)').forEach(element => element.classList.add('rv'));
 reveal();
 // Keep photo sourcing metadata in the dataset without adding repetitive labels below every card.
@@ -315,24 +376,33 @@ if (P === 'home') {
          a.innerHTML = `<h1>${esc(e.name)}</h1><p>${esc(e.overview)}</p>${ph(e.name, e.image)}<div class="split"><div><h2>Key facts</h2><dl><dt>Altitude</dt><dd>${Number(e.altitude).toLocaleString()} m</dd><dt>Country</dt><dd>${esc(e.country)}</dd><dt>Difficulty</dt><dd>${esc(e.difficulty)}</dd><dt>Season</dt><dd>${esc(e.season)}</dd><dt>Indicative duration</dt><dd>~${Number(e.days)} days; operator dependent</dd></dl><h2>Before you climb</h2><p class="note">Confirm current permits, itinerary, costs, insurance, accommodation and route conditions with official authorities and a qualified operator.</p></div><div><h2>Preparation prompts</h2><ul class="chk"><li>Build relevant experience and fitness well before departure.</li><li>Confirm that boots, crampons, ice axe, harness and helmet are appropriate for the route and team.</li><li>Carry layered clothing, weather protection, navigation, communication and first-aid supplies.</li><li>Plan gradual acclimatization when the route reaches high altitude.</li><li>Agree on a turnaround time and emergency plan with the whole team.</li></ul><h2>Safety</h2><p>Altitude illness, weather, avalanche, rockfall and cold risks vary by route and conditions. Stop ascent and descend if altitude symptoms worsen.</p><a class="btn pri" href="booking.html?id=${encodeURIComponent(e.id)}">Enquiry form demo</a></div></div>`
       } catch { fail(a) }
    }
-   if (P === 'destinations') { try { const all = await load('destinations'), r = () => { const q = $('#q').value.toLowerCase(); g.innerHTML = all.filter(d => (d.name + d.country + d.range).toLowerCase().includes(q)).map(d => `<article class="card rv">${ph(d.name, d.image)}<div class="body"><h3>${esc(d.name)}</h3><dl><dt>Country</dt><dd>${esc(d.country)}</dd><dt>Range</dt><dd>${esc(d.range)}</dd><dt>Altitude</dt><dd>${Number(d.altitude).toLocaleString()} m</dd><dt>Season</dt><dd>${esc(d.season)}</dd><dt>Difficulty</dt><dd>${esc(d.difficulty)}</dd></dl><p>Plan acclimatization and gain relevant experience before climbing.</p></div></article>`).join('') || '<p>No destinations match your search.</p>'; reveal() }; $('#q').oninput = r; r() } catch { fail(g) } }
+   if (P === 'destinations') { try { const all = await load('destinations'), r = () => { const q = $('#q').value.toLowerCase(); g.innerHTML = all.filter(d => (d.name + d.country + d.range).toLowerCase().includes(q)).map(d => { const lat = Number(d.coordinates.lat), lon = Number(d.coordinates.lon), mapUrl = `https://maps.google.com/maps?q=${lat},${lon}&z=8&output=embed`, directionsUrl = `https://www.google.com/maps/search/?api=1&query=${lat}%2C${lon}`; return `<article class="card rv">${ph(d.name, d.image)}<div class="body"><h3>${esc(d.name)}</h3><dl><dt>Country</dt><dd>${esc(d.country)}</dd><dt>Range</dt><dd>${esc(d.range)}</dd><dt>Altitude</dt><dd>${Number(d.altitude).toLocaleString()} m</dd><dt>Season</dt><dd>${esc(d.season)}</dd><dt>Difficulty</dt><dd>${esc(d.difficulty)}</dd></dl><p>Plan acclimatization and gain relevant experience before climbing.</p><div class="destination-map"><iframe title="${esc(d.name)} summit location map" src="${esc(mapUrl)}" loading="lazy" referrerpolicy="no-referrer"></iframe><a href="${esc(directionsUrl)}" target="_blank" rel="noopener noreferrer">Open ${esc(d.name)} in Google Maps</a></div></div></article>` }).join('') || '<p>No destinations match your search.</p>'; reveal() }; $('#q').oninput = r; r() } catch { fail(g) } }
    if (P === 'guides') { try { g.innerHTML = (await load('guides')).map(x => `<article class="card rv">${ph(x.name, x.image)}<div class="body"><h3>${esc(x.name)}</h3><span class="tag">${esc(x.role)}</span><p>${esc(x.bio)}</p><a class="text-link" href="mountaineering.html#field-techniques">Explore field guide <span class="icon-external" aria-hidden="true"></span></a></div></article>`).join(''); reveal() } catch { fail(g) } }
    if (P === 'gallery') {
       try {
          const all = await load('gallery');
          const dlg = $('#lb');
+         let visible = [];
+         let currentIndex = 0;
          $('#cat').innerHTML += [...new Set(all.map(item => item.cat))]
             .map(category => `<option>${esc(category)}</option>`).join('');
 
-         const openPhoto = entry => {
+         const showPhoto = index => {
+            currentIndex = (index + visible.length) % visible.length;
+            const entry = visible[currentIndex];
             $('#cap').textContent = entry.caption;
             $('#lb-image').src = imgSrc(entry.image);
             $('#lb-image').alt = entry.image.alt || entry.caption;
+            $('#lb-count').textContent = `${currentIndex + 1} of ${visible.length}`;
+         };
+
+         const openPhoto = index => {
+            showPhoto(index);
             dlg.showModal();
          };
 
          const renderGallery = () => {
-            const visible = all.filter(item => !$('#cat').value || item.cat === $('#cat').value);
+            visible = all.filter(item => !$('#cat').value || item.cat === $('#cat').value);
             g.innerHTML = visible.map((item, index) => `
                <article class="card gallery-card rv">
                   ${ph(item.caption, item.image)}
@@ -344,12 +414,14 @@ if (P === 'home') {
                   </div>
                </article>`).join('') || '<p>No gallery photos match this category.</p>';
             $$('.gallery-trigger', g).forEach(button => {
-               button.addEventListener('click', () => openPhoto(visible[Number(button.dataset.index)]));
+               button.addEventListener('click', () => openPhoto(Number(button.dataset.index)));
             });
             reveal();
          };
 
          $('#cat').addEventListener('change', renderGallery);
+         $('#lb-prev').addEventListener('click', () => showPhoto(currentIndex - 1));
+         $('#lb-next').addEventListener('click', () => showPhoto(currentIndex + 1));
          $('#lb-close').addEventListener('click', () => dlg.close());
          dlg.addEventListener('click', event => {
             if (event.target === dlg) dlg.close();
@@ -359,7 +431,14 @@ if (P === 'home') {
             dlg.close();
          });
          document.addEventListener('keydown', event => {
-            if (event.key === 'Escape' && dlg.open) dlg.close();
+            if (!dlg.open) return;
+            if (event.key === 'ArrowLeft') {
+               event.preventDefault();
+               showPhoto(currentIndex - 1);
+            } else if (event.key === 'ArrowRight') {
+               event.preventDefault();
+               showPhoto(currentIndex + 1);
+            }
          });
          renderGallery();
       } catch { fail(g) }
@@ -445,7 +524,34 @@ if (P === 'home') {
          sections.forEach(([, target]) => fail($('#' + target), 'Could not load the field guide. Run the website through a local server.'));
       }
    }
-   const sel = $('#exp'); if (sel) { try { const all = await load('expeditions'); sel.innerHTML = '<option value="">Select…</option>' + all.map(e => `<option value="${e.id}">${e.name}</option>`).join(''); sel.value = new URLSearchParams(location.search).get('id') || '' } catch { sel.innerHTML = '<option value="">Unavailable</option>' } }
+   const sel = $('#exp'); if (sel) {
+      try {
+         const all = await load('expeditions');
+         sel.innerHTML = '<option value="">Select…</option>' + all.map(e => `<option value="${e.id}">${e.name}</option>`).join('');
+         sel.value = new URLSearchParams(location.search).get('id') || '';
+         const packageCards = $$('.package-card[data-package]');
+         const packageStatus = $('#package-status');
+         const syncPackageCards = () => packageCards.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.package === sel.value)));
+         const updatePackageStatus = () => {
+            const selectedPackage = packageCards.find(button => button.dataset.package === sel.value);
+            if (packageStatus) packageStatus.textContent = selectedPackage
+               ? `${$('h3', selectedPackage).textContent} added to your enquiry outline.`
+               : 'Select a route outline to add it to your enquiry.';
+            syncPackageCards();
+         };
+         packageCards.forEach(button => button.addEventListener('click', () => {
+            sel.value = button.dataset.package;
+            updatePackageStatus();
+         }));
+         sel.addEventListener('change', updatePackageStatus);
+         updatePackageStatus();
+      } catch {
+         sel.innerHTML = '<option value="">Unavailable</option>';
+         $$('.package-card').forEach(button => button.disabled = true);
+         const packageStatus = $('#package-status');
+         if (packageStatus) packageStatus.textContent = 'Route outlines could not be loaded. Please try again later.';
+      }
+   }
    $$('form[data-form]').forEach(f => f.onsubmit = e => {
       e.preventDefault(); let bad = 0; $$('[required]', f).forEach(i => {
          const er = i.nextElementSibling, v = i.value.trim(); let m = '';

@@ -24,10 +24,15 @@
                 <div id="grid" class="grid" aria-live="polite">Loading…</div>
                 <dialog id="lb" aria-labelledby="cap">
                     <figure class="lightbox-figure">
-                        <img id="lb-image" src="" alt="">
+                        <img id="lb-image" alt="">
                         <figcaption id="cap"></figcaption>
                     </figure>
-                    <button id="lb-close" class="btn" type="button">Close photo</button>
+                    <div class="lightbox-controls">
+                        <button id="lb-prev" class="btn" type="button" aria-label="Previous photo">Previous</button>
+                        <span id="lb-count" aria-live="polite"></span>
+                        <button id="lb-next" class="btn" type="button" aria-label="Next photo">Next</button>
+                        <button id="lb-close" class="btn" type="button">Close photo</button>
+                    </div>
                 </dialog>
             </div>
         </section>

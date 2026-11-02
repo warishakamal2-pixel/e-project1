@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Contact – Alpine Ascents</title>
-    <meta name="description" content="Contact Alpine Ascents with questions about mountain routes, climbing resources and the field guide.">
+    <title>Contact the field guide – Alpine Ascents</title>
+    <meta name="description" content="Send Alpine Ascents a question about route research, climbing resources or the independent mountain field guide.">
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/svg+xml" href="assets/images/climbing/alpine-mark.svg">
 </head>
@@ -13,40 +13,62 @@
 <body data-page="contact">
     <div id="nav"></div>
     <main>
-        <section>
+        <section class="contact-page">
             <div class="wrap rv">
-                <h1 style="font-size:clamp(2rem,5vw,3.5rem)">Contact</h1>
-                <p>Have a question about route research or the field guide? Send us a note and tell us what you are exploring.</p>
-                <form data-form novalidate>
-                    <div><label for="n">Full name</label><input id="n" name="n" type="text" required><span
-                            class="err"></span></div>
-                    <div><label for="e">Email</label><input id="e" name="e" type="email" required><span
-                            class="err"></span></div>
-                    <div><label for="m">Message</label><textarea id="m" rows="4"></textarea></div><button
-                        class="btn pri">Send message</button>
-                    <p class="ok" role="status"></p>
-                </form>
-                <h2>Helpful places to start</h2>
-                <div class="grid contact-grid">
-                    <article class="card">
-                        <div class="ph"><img src="assets/images/climbing/guide-climber-wall.jpg" alt="Climber practicing movement on a rock wall" loading="lazy"></div>
-                        <div class="body"><h3>Find a local community</h3><p>Use the optional location search to look for mapped clubs near you.</p><a class="btn" href="mountaineering.html#field-organizations">Find a club</a></div>
-                    </article>
-                    <article class="card">
-                        <div class="ph"><img src="assets/images/climbing/expedition-k2.jpg" alt="Mountaineer moving on a snow-covered slope" loading="lazy"></div>
-                        <div class="body"><h3>Review route details</h3><p>Compare route summaries and confirm current conditions before making a plan.</p><a class="btn" href="expeditions.html">Browse routes</a></div>
-                    </article>
-                    <article class="card">
-                        <div class="ph"><img src="assets/images/climbing/page-safety.jpg" alt="Mountaineer ascending a snowy ridge" loading="lazy"></div>
-                        <div class="body"><h3>Prepare thoughtfully</h3><p>Use the safety notes as prompts for a route-specific plan.</p><a class="btn" href="safety.html">Read safety notes</a></div>
-                    </article>
+                <p class="eyebrow"><span></span> Questions, notes &amp; field-guide feedback</p>
+                <h1 class="page-title">Let's talk mountains.</h1>
+                <p class="contact-lead">Have a question about route research or the field guide? Send a note and tell us what you are exploring.</p>
+                <div class="contact-layout">
+                    <div class="contact-form-panel">
+                        <span class="contact-kicker">GET IN TOUCH</span>
+                        <h2>Send a message</h2>
+                        <p>This demonstration form checks your details in this browser; it does not send or store a message.</p>
+                        <form data-form novalidate>
+                            <div><label for="n">Full name</label><input id="n" name="n" type="text" autocomplete="name" required><span class="err"></span></div>
+                            <div><label for="e">Email</label><input id="e" name="e" type="email" autocomplete="email" required><span class="err"></span></div>
+                            <div><label for="topic">What is your message about?</label>
+                                <select id="topic" name="topic">
+                                    <option value="">Choose a topic (optional)</option>
+                                    <option>Route research</option>
+                                    <option>Field guide feedback</option>
+                                    <option>Website question</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                            <div><label for="m">Message</label><textarea id="m" name="message" rows="5" required></textarea><span class="err"></span></div>
+                            <button class="btn pri" type="submit">Review message</button>
+                            <p class="ok" role="status" aria-live="polite"></p>
+                        </form>
+                    </div>
+                    <aside class="contact-aside" aria-label="Helpful resources">
+                        <div class="contact-aside-heading">
+                            <span class="contact-kicker">A GOOD PLACE TO START</span>
+                            <h2>Find the right trail.</h2>
+                            <p>These independent resources may answer your question sooner.</p>
+                        </div>
+                        <a class="contact-resource" href="expeditions.html">
+                            <span class="contact-resource-number">01</span>
+                            <span><strong>Compare route profiles</strong><small>Altitude, typical duration, seasons and difficulty.</small></span>
+                            <span class="contact-resource-arrow" aria-hidden="true">↗</span>
+                        </a>
+                        <a class="contact-resource" href="mountaineering.html#field-organizations">
+                            <span class="contact-resource-number">02</span>
+                            <span><strong>Find mountain organizations</strong><small>Explore mapped clubs and official links.</small></span>
+                            <span class="contact-resource-arrow" aria-hidden="true">↗</span>
+                        </a>
+                        <a class="contact-resource" href="safety.html">
+                            <span class="contact-resource-number">03</span>
+                            <span><strong>Read safety guidance</strong><small>Use practical prompts for your own preparation.</small></span>
+                            <span class="contact-resource-arrow" aria-hidden="true">↗</span>
+                        </a>
+                        <p class="contact-boundary">Alpine Ascents is an independent information guide—not a guiding, booking, emergency or customer-support service.</p>
+                    </aside>
                 </div>
             </div>
         </section>
     </main>
     <div id="foot"></div>
     <script src="js/media.js"></script>
-    <!-- The local assistant answers from this site's mountain-climbing data only. -->
     <script src="js/main.js"></script>
     <script src="js/assistant.js"></script>
 </body>

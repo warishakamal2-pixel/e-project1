@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Booking enquiry – Alpine Ascents</title>
-    <meta name="description" content="Booking enquiry form demonstration for Alpine Ascents expedition route research.">
+    <title>Plan a trip – Alpine Ascents</title>
+    <meta name="description" content="Explore indicative mountain trip-planning outlines and prepare an expedition enquiry with Alpine Ascents.">
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/svg+xml" href="assets/images/climbing/alpine-mark.svg">
 </head>
@@ -13,48 +13,95 @@
 <body data-page="booking">
     <div id="nav"></div>
     <main>
-        <section>
+        <section class="booking-page">
             <div class="wrap rv">
-                <h1 style="font-size:clamp(2rem,5vw,3.5rem)">Booking enquiry</h1>
-                <p>Use the form to explore an expedition enquiry. No trip, guide or reservation is offered or confirmed by this website.</p>
-                <p class="note">This form is a front-end demonstration only. It does not send or save your details. Confirm operators, current prices, permits, insurance and cancellation terms independently before making travel plans.</p>
-                <!-- This front-end demonstration validates fields but never submits a booking. -->
-                <form data-form novalidate>
-                    <div><label for="n">Full name</label><input id="n" name="n" type="text" required><span
-                            class="err"></span></div>
-                    <div><label for="e">Email</label><input id="e" name="e" type="email" required><span
-                            class="err"></span></div>
-                    <div><label for="exp">Expedition</label><select id="exp" required></select><span class="err"></span>
+                <p class="eyebrow"><span></span> Start with a route, then make a careful plan</p>
+                <h1 class="page-title">Plan your next<br><em>mountain chapter.</em></h1>
+                <p class="booking-lead">Choose an indicative route outline to prefill an enquiry. Compare the objective with your experience, available time and current conditions.</p>
+
+                <div class="booking-disclaimer note">
+                    Indicative budgeting ranges per climber in USD, for planning only—not live quotes or offers. Actual operator rates vary by season, route, group size and inclusions. Airfare, personal gear and some permits or fees may be extra; verify current costs directly with a qualified operator.
+                </div>
+
+                <div class="package-heading">
+                    <div><span class="booking-kicker">EXPLORE ROUTE OUTLINES</span><h2>Choose a planning track</h2></div>
+                    <p id="package-status" role="status" aria-live="polite">Select a route outline to add it to your enquiry.</p>
+                </div>
+                <div class="package-grid" aria-label="Indicative mountain route planning options">
+                    <button class="package-card" type="button" data-package="kilimanjaro" aria-pressed="false">
+                        <span class="package-number">01 / TREK</span><span class="package-duration">~8 days</span><span class="package-price">US$2,500–5,000 <small>per climber</small></span>
+                        <h3>Kilimanjaro</h3><p>High-altitude trekking, gradual ascent and a deliberate acclimatization plan.</p>
+                        <span class="package-level">Moderate · Tanzania</span><span class="package-action">Add to enquiry <span aria-hidden="true">→</span></span>
+                    </button>
+                    <button class="package-card" type="button" data-package="aconcagua" aria-pressed="false">
+                        <span class="package-number">02 / ALTITUDE</span><span class="package-duration">~18 days</span><span class="package-price">US$5,000–10,000 <small>per climber</small></span>
+                        <h3>Aconcagua</h3><p>A high-altitude objective that calls for fitness, acclimatization and permit research.</p>
+                        <span class="package-level">Hard · Argentina</span><span class="package-action">Add to enquiry <span aria-hidden="true">→</span></span>
+                    </button>
+                    <button class="package-card" type="button" data-package="denali" aria-pressed="false">
+                        <span class="package-number">03 / GLACIER</span><span class="package-duration">~21 days</span><span class="package-price">US$12,000–25,000 <small>per climber</small></span>
+                        <h3>Denali</h3><p>Consider cold-weather systems, glacier travel, heavy loads and self-sufficiency.</p>
+                        <span class="package-level">Very hard · Alaska</span><span class="package-action">Add to enquiry <span aria-hidden="true">→</span></span>
+                    </button>
+                    <button class="package-card" type="button" data-package="mont-blanc" aria-pressed="false">
+                        <span class="package-number">04 / ALPINE</span><span class="package-duration">~5 days</span><span class="package-price">US$3,000–8,000 <small>per climber</small></span>
+                        <h3>Mont Blanc</h3><p>Review alpine skills, route choice, weather windows and current mountain access.</p>
+                        <span class="package-level">Hard · France / Italy</span><span class="package-action">Add to enquiry <span aria-hidden="true">→</span></span>
+                    </button>
+                    <button class="package-card" type="button" data-package="matterhorn" aria-pressed="false">
+                        <span class="package-number">05 / TECHNICAL</span><span class="package-duration">~5 days</span><span class="package-price">US$4,000–10,000 <small>per climber</small></span>
+                        <h3>Matterhorn</h3><p>Technical terrain requires relevant climbing experience and qualified local advice.</p>
+                        <span class="package-level">Very hard · Switzerland / Italy</span><span class="package-action">Add to enquiry <span aria-hidden="true">→</span></span>
+                    </button>
+                    <button class="package-card" type="button" data-package="annapurna-i" aria-pressed="false">
+                        <span class="package-number">06 / EXPEDITION</span><span class="package-duration">~45 days</span><span class="package-price">US$25,000–45,000 <small>per climber</small></span>
+                        <h3>Annapurna I</h3><p>A serious high-altitude expedition profile for highly experienced teams.</p>
+                        <span class="package-level">Extreme · Nepal</span><span class="package-action">Add to enquiry <span aria-hidden="true">→</span></span>
+                    </button>
+                    <button class="package-card" type="button" data-package="lhotse" aria-pressed="false">
+                        <span class="package-number">07 / EXPEDITION</span><span class="package-duration">~50 days</span><span class="package-price">US$30,000–60,000 <small>per climber</small></span>
+                        <h3>Lhotse</h3><p>Plan for advanced high-altitude experience, acclimatization and changing conditions.</p>
+                        <span class="package-level">Extreme · Nepal / China</span><span class="package-action">Add to enquiry <span aria-hidden="true">→</span></span>
+                    </button>
+                    <button class="package-card" type="button" data-package="everest" aria-pressed="false">
+                        <span class="package-number">08 / HIGH ALTITUDE</span><span class="package-duration">~60 days</span><span class="package-price">US$45,000–100,000+ <small>per climber</small></span>
+                        <h3>Mount Everest</h3><p>Research permits, oxygen planning, acclimatization and qualified operators.</p>
+                        <span class="package-level">Extreme · Nepal / China</span><span class="package-action">Add to enquiry <span aria-hidden="true">→</span></span>
+                    </button>
+                    <button class="package-card" type="button" data-package="k2" aria-pressed="false">
+                        <span class="package-number">09 / EXPERT</span><span class="package-duration">~60 days</span><span class="package-price">US$30,000–60,000+ <small>per climber</small></span>
+                        <h3>K2</h3><p>An exceptionally demanding objective for expert climbers with substantial experience.</p>
+                        <span class="package-level">Extreme · Pakistan / China</span><span class="package-action">Add to enquiry <span aria-hidden="true">→</span></span>
+                    </button>
+                </div>
+
+                <div class="booking-form-layout" id="trip-enquiry">
+                    <div class="booking-form-intro">
+                        <span class="booking-kicker">YOUR NEXT STEP</span>
+                        <h2>Shape an enquiry</h2>
+                        <p>Use this local demo to organize the questions you would take to an independently verified operator.</p>
+                        <ol>
+                            <li>Choose an objective that fits your experience.</li>
+                            <li>Research permits, health guidance and seasonal conditions.</li>
+                            <li>Verify operators, insurance and total costs before committing.</li>
+                        </ol>
                     </div>
-                    <div><label for="d">Preferred dates</label><input id="d" name="d" type="text" required><span
-                            class="err"></span></div>
-                    <div><label for="g">Group size</label><input id="g" name="g" type="number" required><span
-                            class="err"></span></div>
-                    <div><label for="m">Message</label><textarea id="m" rows="4"></textarea></div><button
-                        class="btn pri">Send enquiry</button>
-                    <p class="ok" role="status"></p>
-                </form>
-                <h2>Before planning a real trip</h2>
-                <div class="grid booking-grid">
-                    <article class="card">
-                        <div class="ph"><img src="assets/images/climbing/expedition-everest.jpg" alt="Climber ascending a steep snowy mountain slope" loading="lazy"></div>
-                        <div class="body"><h3>Check route fit</h3><p>Match the objective to your team's experience, skills and health.</p><a class="btn" href="mountaineering.html#field-styles">Compare climbing styles</a></div>
-                    </article>
-                    <article class="card">
-                        <div class="ph"><img src="assets/images/climbing/expedition-denali.jpg" alt="Mountaineer crossing a snowy slope" loading="lazy"></div>
-                        <div class="body"><h3>Confirm current details</h3><p>Ask the relevant authority and operator about permits, dates, fees and local rules.</p><a class="btn" href="destinations.html">Explore destinations</a></div>
-                    </article>
-                    <article class="card">
-                        <div class="ph"><img src="assets/images/climbing/gallery-climber-ridge.jpg" alt="Climber on an exposed rock route" loading="lazy"></div>
-                        <div class="body"><h3>Plan for safety</h3><p>Review health, acclimatization, insurance and an emergency plan with qualified people.</p><a class="btn" href="safety.html">Read safety guidance</a></div>
-                    </article>
+                    <form data-form novalidate>
+                        <div><label for="n">Full name</label><input id="n" name="n" type="text" autocomplete="name" required><span class="err"></span></div>
+                        <div><label for="e">Email</label><input id="e" name="e" type="email" autocomplete="email" required><span class="err"></span></div>
+                        <div><label for="exp">Expedition</label><select id="exp" name="expedition" required><option value="">Loading routes…</option></select><span class="err"></span></div>
+                        <div><label for="d">Preferred dates or season</label><input id="d" name="dates" type="text" placeholder="For example, June–July" required><span class="err"></span></div>
+                        <div><label for="g">Group size</label><input id="g" name="groupSize" type="number" min="1" max="20" inputmode="numeric" required><span class="err"></span></div>
+                        <div><label for="m">Questions for your own planning</label><textarea id="m" name="message" rows="4" placeholder="Experience, route questions, or topics to research"></textarea></div>
+                        <button class="btn pri" type="submit">Review enquiry</button>
+                        <p class="ok" role="status" aria-live="polite"></p>
+                    </form>
                 </div>
             </div>
         </section>
     </main>
     <div id="foot"></div>
     <script src="js/media.js"></script>
-    <!-- The local assistant answers from this site's mountain-climbing data only. -->
     <script src="js/main.js"></script>
     <script src="js/assistant.js"></script>
 </body>

@@ -2,6 +2,7 @@
     {
         "name": "Mount Everest",
         "country": "Nepal / China",
+        "coordinates": { "lat": 27.9881, "lon": 86.9250 },
         "altitude": 8849,
         "range": "Himalaya",
         "season": "Apr–May",
@@ -16,6 +17,7 @@
     {
         "name": "K2",
         "country": "Pakistan / China",
+        "coordinates": { "lat": 35.8808, "lon": 76.5152 },
         "altitude": 8611,
         "range": "Karakoram",
         "season": "Jun–Aug",
@@ -30,6 +32,7 @@
     {
         "name": "Denali",
         "country": "USA",
+        "coordinates": { "lat": 63.0695, "lon": -151.0074 },
         "altitude": 6190,
         "range": "Alaska Range",
         "season": "May–Jul",
@@ -44,6 +47,7 @@
     {
         "name": "Mont Blanc",
         "country": "France / Italy",
+        "coordinates": { "lat": 45.8326, "lon": 6.8652 },
         "altitude": 4806,
         "range": "Alps",
         "season": "Jun–Sep",
@@ -58,6 +62,7 @@
     {
         "name": "Mount Kilimanjaro",
         "country": "Tanzania",
+        "coordinates": { "lat": -3.0674, "lon": 37.3556 },
         "altitude": 5895,
         "range": "Eastern Rift",
         "season": "Jan–Mar, Jun–Oct",
@@ -72,6 +77,7 @@
     {
         "name": "Aconcagua",
         "country": "Argentina",
+        "coordinates": { "lat": -32.6532, "lon": -70.0109 },
         "altitude": 6961,
         "range": "Andes",
         "season": "December–February (typical)",
@@ -86,6 +92,7 @@
     {
         "name": "Annapurna I",
         "country": "Nepal",
+        "coordinates": { "lat": 28.5958, "lon": 83.8203 },
         "altitude": 8091,
         "range": "Himalaya",
         "season": "Spring and autumn (typical)",
@@ -100,6 +107,7 @@
     {
         "name": "Matterhorn",
         "country": "Switzerland / Italy",
+        "coordinates": { "lat": 45.9763, "lon": 7.6586 },
         "altitude": 4478,
         "range": "Alps",
         "season": "Summer (route and conditions dependent)",
