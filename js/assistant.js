@@ -1,6 +1,6 @@
 // Match mountain-climbing questions against the site's local content.
 (() => {
-  const DATA_FILES = ['mountaineering', 'guides', 'faqs', 'expeditions', 'destinations'];
+  const DATA_FILES = ['mountaineering', 'faqs', 'expeditions', 'destinations'];
   // Keep the scope narrow; generic words such as "rock" or "ice" are not enough on their own.
   const DOMAIN_TERMS = new Set([
     'mountain', 'mountaineer', 'climb', 'climber', 'alpine', 'alpinism', 'summit',
@@ -187,7 +187,7 @@
           if (isMountainTopic(`${item.q} ${item.a}`)) documents.push(makeDocument(item, 'Mountain FAQ', item.q));
         }
       } else if (file === 'expeditions' || file === 'destinations' || Array.isArray(data)) {
-        for (const item of data) documents.push(makeDocument(item, file === 'expeditions' ? 'Expedition profiles' : file === 'destinations' ? 'Mountain destinations' : 'Climbing guides', file));
+        for (const item of data) documents.push(makeDocument(item, file === 'expeditions' ? 'Expedition profiles' : 'Mountain destinations', file));
       } else {
         for (const [section, items] of Object.entries(data)) {
           if (!Array.isArray(items)) continue;

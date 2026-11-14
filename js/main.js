@@ -1,7 +1,7 @@
 /* main.js – navigation, footer, JSON rendering, filters, forms. Media helpers live in media.js */
 const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
-const PAGES = [['index', 'Home'], ['expeditions', 'Expeditions'], ['destinations', 'Destinations'], ['mountaineering', 'Field guide'], ['guides', 'Guides'], ['gallery', 'Gallery'], ['safety', 'Safety'], ['about', 'About'], ['faq', 'FAQ'], ['contact', 'Contact']];
-// JSON contracts: route/destination arrays hold mountain facts and images; guides hold bios, FAQs hold q/a pairs,
+const PAGES = [['index', 'Home'], ['expeditions', 'Expeditions'], ['destinations', 'Destinations'], ['mountaineering', 'Field guide'], ['gallery', 'Gallery'], ['safety', 'Safety'], ['about', 'About'], ['faq', 'FAQ'], ['contact', 'Contact']];
+// JSON contracts: route/destination arrays hold mountain facts and images; FAQs hold q/a pairs,
 // gallery holds captions/categories, and mountaineering groups titled entries into named section arrays.
 const load = async f => { const r = await fetch('data/' + f + '.json'); if (!r.ok) throw new Error(f); return r.json() };
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -66,22 +66,9 @@ const ensureDistinctPagePhotos = () => {
    });
 };
 // Keep every destination available; phones use a menu while tablets get an arrow-controlled swipeable link rail.
-$('#nav').innerHTML = `<header><div class="wrap"><div class="brand-group"><a class="logo" href="index.html" aria-label="Alpine Ascents home"><img src="assets/images/climbing/alpine-mark.svg" alt=""><span>Alpine</span>Ascents</a><div class="visit-counter" title="Site-wide page views, counted by a hosted service"><small>SITE<br>VISITS</small><img id="visit-count" src="https://visitor-badge.laobi.icu/badge?page_id=warishakamal2-pixel.e-project1&amp;left_text=views&amp;left_color=%233e503f&amp;right_color=%23a56c41&amp;radius=8&amp;height=24" alt="Site-wide visit count" width="82" height="24" loading="eager" decoding="async"></div></div><nav id="primary-navigation" class="site-nav" aria-label="Main navigation"><button class="nav-scroll nav-scroll-prev" type="button" aria-label="Scroll navigation left" aria-controls="primary-navigation-links" disabled><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m15 18-6-6 6-6"></path></svg></button><ul id="primary-navigation-links">${PAGES.map(([p, t]) => `<li><a href="${p}.html"${p === cur ? ' aria-current="page"' : ''}>${t}</a></li>`).join('')}<li><a class="btn pri" href="booking.html">Plan a trip</a></li></ul><button class="nav-scroll nav-scroll-next" type="button" aria-label="Scroll navigation right" aria-controls="primary-navigation-links" disabled><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9 18 6-6-6-6"></path></svg></button></nav><button id="menu" class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-navigation"><span></span><span></span><span></span></button></div></header>`;
+$('#nav').innerHTML = `<header><div class="wrap"><div class="brand-group"><a class="logo" href="index.html" aria-label="Alpine Ascents home"><img src="assets/images/climbing/alpine-mark.svg" alt=""><span>Alpine</span>Ascents</a></div><nav id="primary-navigation" class="site-nav" aria-label="Main navigation"><button class="nav-scroll nav-scroll-prev" type="button" aria-label="Scroll navigation left" aria-controls="primary-navigation-links" disabled><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m15 18-6-6 6-6"></path></svg></button><ul id="primary-navigation-links">${PAGES.map(([p, t]) => `<li><a href="${p}.html"${p === cur ? ' aria-current="page"' : ''}>${t}</a></li>`).join('')}<li><a class="btn pri" href="booking.html">Plan a trip</a></li></ul><button class="nav-scroll nav-scroll-next" type="button" aria-label="Scroll navigation right" aria-controls="primary-navigation-links" disabled><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9 18 6-6-6-6"></path></svg></button></nav><button id="menu" class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-navigation"><span></span><span></span><span></span></button></div></header>`;
 const navButton = $('#menu');
 const siteNav = $('.site-nav');
-const visitBadge = $('#visit-count');
-visitBadge.addEventListener('error', () => {
-   const unavailable = document.createElement('span');
-   unavailable.className = 'visit-counter-unavailable';
-   unavailable.setAttribute('role', 'status');
-   unavailable.textContent = 'Unavailable';
-   visitBadge.replaceWith(unavailable);
-});
-try {
-   localStorage.removeItem('aa-local-visits');
-} catch (error) {
-   console.warn('Could not remove the retired browser-only visit counter.', error);
-}
 const navTrack = $('#primary-navigation-links');
 const navScrollButtons = $$('.nav-scroll', siteNav);
 const updateNavScrollButtons = () => {
@@ -155,7 +142,6 @@ $('#foot').innerHTML = `
             <nav class="footer-links" aria-label="Learn and prepare">
                <h2>Learn &amp; prepare</h2>
                <ul>
-                  <li><a href="guides.html">Climbing guides</a></li>
                   <li><a href="safety.html">Mountain safety</a></li>
                   <li><a href="faq.html">Frequently asked questions</a></li>
                   <li><a href="gallery.html">Photo gallery</a></li>
@@ -376,8 +362,7 @@ if (P === 'home') {
          a.innerHTML = `<h1>${esc(e.name)}</h1><p>${esc(e.overview)}</p>${ph(e.name, e.image)}<div class="split"><div><h2>Key facts</h2><dl><dt>Altitude</dt><dd>${Number(e.altitude).toLocaleString()} m</dd><dt>Country</dt><dd>${esc(e.country)}</dd><dt>Difficulty</dt><dd>${esc(e.difficulty)}</dd><dt>Season</dt><dd>${esc(e.season)}</dd><dt>Indicative duration</dt><dd>~${Number(e.days)} days; operator dependent</dd></dl><h2>Before you climb</h2><p class="note">Confirm current permits, itinerary, costs, insurance, accommodation and route conditions with official authorities and a qualified operator.</p></div><div><h2>Preparation prompts</h2><ul class="chk"><li>Build relevant experience and fitness well before departure.</li><li>Confirm that boots, crampons, ice axe, harness and helmet are appropriate for the route and team.</li><li>Carry layered clothing, weather protection, navigation, communication and first-aid supplies.</li><li>Plan gradual acclimatization when the route reaches high altitude.</li><li>Agree on a turnaround time and emergency plan with the whole team.</li></ul><h2>Safety</h2><p>Altitude illness, weather, avalanche, rockfall and cold risks vary by route and conditions. Stop ascent and descend if altitude symptoms worsen.</p><a class="btn pri" href="booking.html?id=${encodeURIComponent(e.id)}">Enquiry form demo</a></div></div>`
       } catch { fail(a) }
    }
-   if (P === 'destinations') { try { const all = await load('destinations'), r = () => { const q = $('#q').value.toLowerCase(); g.innerHTML = all.filter(d => (d.name + d.country + d.range).toLowerCase().includes(q)).map(d => { const lat = Number(d.coordinates.lat), lon = Number(d.coordinates.lon), mapUrl = `https://maps.google.com/maps?q=${lat},${lon}&z=8&output=embed`, directionsUrl = `https://www.google.com/maps/search/?api=1&query=${lat}%2C${lon}`; return `<article class="card rv">${ph(d.name, d.image)}<div class="body"><h3>${esc(d.name)}</h3><dl><dt>Country</dt><dd>${esc(d.country)}</dd><dt>Range</dt><dd>${esc(d.range)}</dd><dt>Altitude</dt><dd>${Number(d.altitude).toLocaleString()} m</dd><dt>Season</dt><dd>${esc(d.season)}</dd><dt>Difficulty</dt><dd>${esc(d.difficulty)}</dd></dl><p>Plan acclimatization and gain relevant experience before climbing.</p><div class="destination-map"><iframe title="${esc(d.name)} summit location map" src="${esc(mapUrl)}" loading="lazy" referrerpolicy="no-referrer"></iframe><a href="${esc(directionsUrl)}" target="_blank" rel="noopener noreferrer">Open ${esc(d.name)} in Google Maps</a></div></div></article>` }).join('') || '<p>No destinations match your search.</p>'; reveal() }; $('#q').oninput = r; r() } catch { fail(g) } }
-   if (P === 'guides') { try { g.innerHTML = (await load('guides')).map(x => `<article class="card rv">${ph(x.name, x.image)}<div class="body"><h3>${esc(x.name)}</h3><span class="tag">${esc(x.role)}</span><p>${esc(x.bio)}</p><a class="text-link" href="mountaineering.html#field-techniques">Explore field guide <span class="icon-external" aria-hidden="true"></span></a></div></article>`).join(''); reveal() } catch { fail(g) } }
+   if (P === 'destinations') { try { const all = await load('destinations'), r = () => { const q = $('#q').value.toLowerCase(); g.innerHTML = all.filter(d => (d.name + d.country + d.range).toLowerCase().includes(q)).map(d => { const lat = Number(d.coordinates.lat), lon = Number(d.coordinates.lon), directionsUrl = `https://www.google.com/maps/search/?api=1&query=${lat}%2C${lon}`; return `<article class="card rv">${ph(d.name, d.image)}<div class="body"><h3>${esc(d.name)}</h3><dl><dt>Country</dt><dd>${esc(d.country)}</dd><dt>Range</dt><dd>${esc(d.range)}</dd><dt>Altitude</dt><dd>${Number(d.altitude).toLocaleString()} m</dd><dt>Season</dt><dd>${esc(d.season)}</dd><dt>Difficulty</dt><dd>${esc(d.difficulty)}</dd></dl><p>Plan acclimatization and gain relevant experience before climbing.</p><div class="destination-map"><a href="${esc(directionsUrl)}" target="_blank" rel="noopener noreferrer">Open ${esc(d.name)} in Google Maps</a></div></div></article>` }).join('') || '<p>No destinations match your search.</p>'; reveal() }; $('#q').oninput = r; r() } catch { fail(g) } }
    if (P === 'gallery') {
       try {
          const all = await load('gallery');
@@ -661,12 +646,40 @@ if (P === 'home') {
          if (packageStatus) packageStatus.textContent = 'Route outlines could not be loaded. Please try again later.';
       }
    }
-   $$('form[data-form]').forEach(f => f.onsubmit = e => {
+   const forms = $$('form[data-form]');
+   const confirmationDialog = document.createElement('dialog');
+   confirmationDialog.className = 'form-confirmation';
+   confirmationDialog.setAttribute('aria-labelledby', 'form-confirmation-title');
+   confirmationDialog.innerHTML = `
+      <div class="form-confirmation-mark" aria-hidden="true">
+         <svg viewBox="0 0 48 48" focusable="false"><circle cx="24" cy="24" r="22"></circle><path d="m14 24 7 7 14-15"></path></svg>
+      </div>
+      <h2 id="form-confirmation-title">Thank you!</h2>
+      <button class="btn pri" type="button">Done</button>`;
+   if (forms.length) document.body.append(confirmationDialog);
+   const closeConfirmation = () => confirmationDialog.close();
+   confirmationDialog.querySelector('button').addEventListener('click', closeConfirmation);
+   confirmationDialog.addEventListener('click', event => {
+      if (event.target === confirmationDialog) closeConfirmation();
+   });
+   forms.forEach(f => f.onsubmit = e => {
       e.preventDefault(); let bad = 0; $$('[required]', f).forEach(i => {
          const er = i.nextElementSibling, v = i.value.trim(); let m = '';
-         if (!v) m = 'Required.'; else if (i.type === 'email' && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)) m = 'Enter a valid email.'; else if (i.type === 'number' && (+v < 1 || +v > 20)) m = 'Enter 1–20.';
+         if (!v) m = 'Required.'; else if (i.type === 'email' && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)) m = 'Enter a valid email.'; else if (i.type === 'number' && (!Number.isInteger(+v) || +v < 1 || +v > 20)) m = 'Enter a whole number from 1–20.';
          if (er) er.textContent = m; i.setAttribute('aria-invalid', !!m); bad += !!m
       });
-      $('.ok', f).textContent = bad ? '' : 'Your message was not sent because this form is not connected to a mail service.';
+      const status = $('.ok', f);
+      if (bad) {
+         if (status) status.textContent = '';
+         f.querySelector('[aria-invalid="true"]')?.focus();
+         return;
+      }
+
+      f.reset();
+      $$('[required]', f).forEach(input => {
+         input.removeAttribute('aria-invalid');
+         if (input.nextElementSibling?.classList.contains('err')) input.nextElementSibling.textContent = '';
+      });
+      confirmationDialog.showModal();
    });
 })();
