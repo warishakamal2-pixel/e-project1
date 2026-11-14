@@ -1,4 +1,5 @@
 const HOME_MEDIA = {
+  video: 'assets/videos/mountain-climb.mp4',
   poster: {
     local: 'assets/images/climbing/home-climbing-poster.jpg',
     alt: 'Climber scaling a steep rock face'
@@ -58,4 +59,62 @@ function heroMedia() {
     hero.style.backgroundImage = `linear-gradient(#33241912 40%,#332419df),url("${poster.local}")`;
   };
   probe.src = poster.local;
+
+  const video = document.createElement('video');
+  video.className = 'bgv';
+  video.autoplay = video.muted = video.loop = video.playsInline = true;
+  video.preload = 'metadata';
+  video.setAttribute('muted', '');
+  video.setAttribute('playsinline', '');
+  video.setAttribute('aria-hidden', 'true');
+  video.poster = poster.local;
+  const source = document.createElement('source');
+  source.src = HOME_MEDIA.video;
+  source.type = 'video/mp4';
+  video.append(source);
+
+  const playbackButton = document.createElement('button');
+  playbackButton.className = 'hero-video-toggle';
+  playbackButton.type = 'button';
+  playbackButton.textContent = 'Play background video';
+  playbackButton.setAttribute('aria-pressed', 'false');
+
+  const setPlaybackState = isPlaying => {
+    playbackButton.textContent = isPlaying ? 'Pause background video' : 'Play background video';
+    playbackButton.setAttribute('aria-pressed', String(isPlaying));
+    hero.classList.toggle('video-playing', isPlaying);
+    if (isPlaying) hero.classList.remove('video-fallback');
+  };
+
+  video.addEventListener('playing', () => setPlaybackState(true));
+  video.addEventListener('pause', () => setPlaybackState(false));
+  video.addEventListener('error', () => {
+    hero.classList.add('video-fallback');
+    setPlaybackState(false);
+    console.warn('Homepage video could not be played; the poster remains visible.', video.error);
+  }, { once: true });
+
+  playbackButton.addEventListener('click', async () => {
+    if (!video.paused) {
+      video.pause();
+      return;
+    }
+
+    try {
+      await video.play();
+    } catch (error) {
+      console.warn('Homepage video playback was blocked by the browser.', error);
+      setPlaybackState(false);
+    }
+  });
+
+  hero.prepend(video, playbackButton);
+
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    video.play().catch(error => {
+      hero.classList.add('video-fallback');
+      setPlaybackState(false);
+      console.info('Homepage autoplay was blocked; the play button is available.', error);
+    });
+  }
 }
