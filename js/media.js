@@ -73,48 +73,17 @@ function heroMedia() {
   source.type = 'video/mp4';
   video.append(source);
 
-  const playbackButton = document.createElement('button');
-  playbackButton.className = 'hero-video-toggle';
-  playbackButton.type = 'button';
-  playbackButton.textContent = 'Play background video';
-  playbackButton.setAttribute('aria-pressed', 'false');
-
-  const setPlaybackState = isPlaying => {
-    playbackButton.textContent = isPlaying ? 'Pause background video' : 'Play background video';
-    playbackButton.setAttribute('aria-pressed', String(isPlaying));
-    hero.classList.toggle('video-playing', isPlaying);
-    if (isPlaying) hero.classList.remove('video-fallback');
-  };
-
-  video.addEventListener('playing', () => setPlaybackState(true));
-  video.addEventListener('pause', () => setPlaybackState(false));
   video.addEventListener('error', () => {
     hero.classList.add('video-fallback');
-    setPlaybackState(false);
     console.warn('Homepage video could not be played; the poster remains visible.', video.error);
   }, { once: true });
 
-  playbackButton.addEventListener('click', async () => {
-    if (!video.paused) {
-      video.pause();
-      return;
-    }
-
-    try {
-      await video.play();
-    } catch (error) {
-      console.warn('Homepage video playback was blocked by the browser.', error);
-      setPlaybackState(false);
-    }
-  });
-
-  hero.prepend(video, playbackButton);
+  hero.prepend(video);
 
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
     video.play().catch(error => {
       hero.classList.add('video-fallback');
-      setPlaybackState(false);
-      console.info('Homepage autoplay was blocked; the play button is available.', error);
+      console.info('Homepage autoplay was blocked; the poster remains visible.', error);
     });
   }
 }
